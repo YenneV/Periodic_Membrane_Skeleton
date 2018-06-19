@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Making_Rings", "Making_Rings\Making_Rings.pyproj", "{542A429C-98A5-46C2-9A1B-9BC893D2A846}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{542A429C-98A5-46C2-9A1B-9BC893D2A846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542A429C-98A5-46C2-9A1B-9BC893D2A846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECF34432-C2A8-4E53-A06D-A94A2C3F52BD}
+	EndGlobalSection
+EndGlobal
