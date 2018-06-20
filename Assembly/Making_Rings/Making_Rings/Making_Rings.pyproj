@@ -23,6 +23,12 @@
   <ItemGroup>
     <Compile Include="Single_Spec.py" />
     <Compile Include="Multi_Spec.py" />
+    <Compile Include="Single_Spec\SS_1.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Single_Spec\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
