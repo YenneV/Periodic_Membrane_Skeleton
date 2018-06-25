@@ -1,9 +1,11 @@
 # Monte Carlo Type Simulation for a Single, Structureless Spectrin Tetramer in a 2D Cartesian Space
 
-from random import randint
+#from random import randint
+import random
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+random.seed(10)
 
 # Function 'step' does a single step given an initial position and a set of allowed coordinates
 # The new coordinates are returned to the calling function
@@ -11,7 +13,7 @@ def step(initial, xrange, yrange):
     x = initial[0]
     y = initial[1]
 
-    step = randint(0,3)
+    step = random.randint(0,3)
     if step == 0:
         x += 1
     elif step == 1:
@@ -56,8 +58,8 @@ def distance():
     route = walk(initial_position, timesteps)
     start_x = route[0,0]
     start_y = route[0,1]
-    end_x = route[100,0]
-    end_y = route[100,1]
+    end_x = route[max(timesteps),0] 
+    end_y = route[max(timesteps),1] 
     delta_x = end_x - start_x
     delta_y = end_y - start_y
     distance = math.sqrt((delta_x)**2 + (delta_y)**2)
@@ -93,7 +95,7 @@ iterations = list(range(1000)) # Number of walks that I want to simulate
 multiwalks = travels(iterations)
 avg_walk = np.mean(multiwalks)
 print(avg_walk)
-hist_plot = plt.hist(multiwalks, bins = 25)
+hist_plot = plt.hist(multiwalks, bins = 10)
 plt.xlabel('End to End Distance of Random Walk')
 plt.ylabel('Frequency')
 plt.show(hist_plot)
