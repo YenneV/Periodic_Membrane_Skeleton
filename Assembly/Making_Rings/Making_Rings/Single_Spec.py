@@ -76,11 +76,11 @@ def travels(iterations):
     return walks
 
 # INPUT PARAMETERS
-xcoords = list(range(1000)) 
-ycoords = list(range(1000))
-timesteps = list(range(1,101)) # Number of steps in each walk, integers from 1 to 1000 inclusive
-initial_position = [500,500] #Initial x,y coordinates of spectrin for each walk
-iterations = list(range(1000)) # Number of walks that I want to simulate
+xcoords = list(range(10000)) 
+ycoords = list(range(10000))
+timesteps = list(range(1,1001)) # Number of steps in each walk, integers from 1 to 1000 inclusive
+initial_position = [5000,5000] #Initial x,y coordinates of spectrin for each walk
+iterations = list(range(1000000)) # Number of walks that I want to simulate
 
 # SCATTER PLOT - Code to visualise a single random walk as a scatter plot for a given number of steps
 #route = walk(initial_position, timesteps)
