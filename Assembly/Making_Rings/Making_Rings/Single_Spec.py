@@ -63,6 +63,8 @@ def distance():
     delta_x = end_x - start_x
     delta_y = end_y - start_y
     distance = math.sqrt((delta_x)**2 + (delta_y)**2)
+    print('walk distance')
+    print(distance)
     return distance
 
 # Function 'travels' records distances walked by calling 'distance', and returns a vector with the 
@@ -71,15 +73,17 @@ def distance():
 def travels(iterations):
     walks = np.zeros(len(iterations), dtype = float)
     for i in iterations:
+        print('Iteration')
+        print(i)
         walks[i] = distance()
 
     return walks
 
 # INPUT PARAMETERS
-xcoords = list(range(10000)) 
-ycoords = list(range(10000))
+xcoords = list(range(3000)) 
+ycoords = list(range(3000))
 timesteps = list(range(1,1001)) # Number of steps in each walk, integers from 1 to 1000 inclusive
-initial_position = [5000,5000] #Initial x,y coordinates of spectrin for each walk
+initial_position = [1500,1500] #Initial x,y coordinates of spectrin for each walk
 iterations = list(range(1000000)) # Number of walks that I want to simulate
 
 # SCATTER PLOT - Code to visualise a single random walk as a scatter plot for a given number of steps
@@ -95,7 +99,7 @@ iterations = list(range(1000000)) # Number of walks that I want to simulate
 multiwalks = travels(iterations)
 avg_walk = np.mean(multiwalks)
 print(avg_walk)
-hist_plot = plt.hist(multiwalks, bins = 10)
+hist_plot = plt.hist(multiwalks, bins = 25)
 plt.xlabel('End to End Distance of Random Walk')
 plt.ylabel('Frequency')
 plt.show(hist_plot)
