@@ -76,6 +76,7 @@ def travels(iterations):
         print('Iteration')
         print(i)
         walks[i] = distance()
+        #put a with statement here so it prints the distance to a file
 
     return walks
 

@@ -24,7 +24,7 @@ spectrins = [spectrin1, spectrin2, spectrin3]
 # Setting up some parameters for the simulation cell and the number of steps 
 xcoords = list(range(100)) #Length 100
 ycoords = list(range(100)) #Length 100
-steps = list(range(1000)) #1000 Steps
+steps = list(range(10000)) #10000 Steps
 
 # Function takes a set of x and y values, and an initial position, and takes a step
 # in one of 4 randomly chosen directions.
@@ -65,7 +65,7 @@ for i in steps:
     mover.position = final_position
     print(mover.position)
     if i%10 == 0:
-        with open('coords{}.txt'.format(i), 'w') as f:
+        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Multi_Point\coords{}.txt'.format(i), 'w') as f:
             f.write(str(spectrin1.position[0]))
             f.write(" ")
             f.write(str(spectrin1.position[1]))
