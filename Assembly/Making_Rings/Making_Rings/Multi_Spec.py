@@ -1,34 +1,41 @@
 #Monte Carlo Type Simulation for multiple structureless spectrin particles in a 2D Cartesian space
 
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 import random
 random.seed(10)
 
 # Creating Class for Particles
 class Particle:
-    def __init__(self, position):
+    instances = []
+    def __init__(self, position, radius):
         self.initialposition = position
         self.position = position
+        self.radius = radius
+        Particle.instances.append(self) #Beware! If I need to delete particles later they won't be removed from this list!
     def position(self, newcoords):
         self.position = newcoords
+    def proximity(self, other):
+        deltax = abs(other.position[0] - self.position[0])
+        deltay = abs(other.position[1] - self.position[1])
+        distance = math.sqrt(deltax**2 + deltay**2)
+        return distance
 
 # Initialising a few objects of the class, Particles
-spectrin1 = Particle([50,50])
-spectrin2 = Particle([20,30])
-spectrin3 = Particle([10,10])
-
-# Putting all particles in a list
-spectrins = [spectrin1, spectrin2, spectrin3]
+spectrin1 = Particle([50,50], 2)
+spectrin2 = Particle([20,30], 2)
+spectrin3 = Particle([10,10], 2)
 
 # Setting up some parameters for the simulation cell and the number of steps 
 xcoords = list(range(100)) #Length 100
 ycoords = list(range(100)) #Length 100
 steps = list(range(10000)) #10000 Steps
+mindist = 20 #Circular particles radius assumed to be 10 at the minute
 
-# Function takes a set of x and y values, and an initial position, and takes a step
-# in one of 4 randomly chosen directions.
-def step(initial, xrange, yrange):
+
+# 'step' function generates a trial move, based on an initial position
+def step(initial):
     x = initial[0]
     y = initial[1]
 
@@ -44,28 +51,53 @@ def step(initial, xrange, yrange):
     else: #Not really necessary but just to make sure rand is drawn in range
         print('Step error - out of range')
 
+    trial = [x,y]
+    return trial
+
+# Function takes a particle, a trial move and the cell limits, and returns true if 
+# the move is accepted and false if it is not (because it leaves the cell or gets 
+# too close to another particle
+def validate(mover, trial_move, xrange, yrange):
+    x = trial_move[0]
+    y = trial_move[1]
+    mover.position = trial_move
+    moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
+    iterations = list(range(0,3)) #List of 0,1,2 - think of a better way of doing this
+    distances = np.zeros([1,3], dtype = float) #Array to hold distances of all particles from the mover
+    for j in iterations:
+        distances[:,j] = (Particle.instances[moverID].proximity(Particle.instances[j]))
+    neighbourdist = distances[distances != 0]
+    closest = np.min(neighbourdist)
+    print(closest)
+    accept = True
     if x not in xrange or y not in yrange:
-        x = initial[0]
-        y = initial[1]
+        accept = False
         print('step rejected - out of range')
-        final = [x,y]
-        return final
+    elif closest < mindist:
+        accept = False
+        print('step rejected - overlaps another particle')
     else:
-        final = [x,y]
-        return final
+        accept = True
+    return accept
 
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
-# to take a random step, and coordinates updated for the chosen particle
+# to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
 for i in steps:
     print(i)
-    mover = (random.choice(spectrins))
+    mover = (random.choice(Particle.instances)) #Selects a particle to move
     initial_position = mover.position
-    print(mover.position)
-    final_position = step(initial_position, xcoords, ycoords)
-    mover.position = final_position
-    print(mover.position)
+    trial_move = step(initial_position)
+    accept = validate(mover, trial_move, xcoords, ycoords) # function to return a yes or no
+    if accept == True:
+        mover.position = trial_move
+        print('move allowed to:')
+        print(mover.position)
+    else:
+        mover.position = initial_position
+        print('move not allowed, remains at:')
+        print(mover.position)
     if i%10 == 0:
-        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Multi_Point\coords{}.txt'.format(i), 'w') as f:
+        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Multi_Sphere\coords{}.txt'.format(i), 'w') as f:
             f.write(str(spectrin1.position[0]))
             f.write(" ")
             f.write(str(spectrin1.position[1]))
@@ -78,9 +110,6 @@ for i in steps:
             f.write(" ")
             f.write(str(spectrin3.position[1]))
             f.write('\n')
-
-
-
 
 
 
