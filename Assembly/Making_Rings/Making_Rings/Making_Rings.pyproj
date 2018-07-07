@@ -21,7 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Plotting.py" />
+    <Compile Include="Plot_Stats.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="2D_Sphere_Sim.py" />
     <Compile Include="Single_Spec.py" />
     <Compile Include="Multi_Spec.py" />
   </ItemGroup>

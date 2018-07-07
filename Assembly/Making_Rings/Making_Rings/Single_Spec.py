@@ -60,8 +60,8 @@ def distance():
     start_y = route[0,1]
     end_x = route[max(timesteps),0] 
     end_y = route[max(timesteps),1] 
-    delta_x = end_x - start_x
-    delta_y = end_y - start_y
+    delta_x = abs(end_x - start_x)
+    delta_y = abs(end_y - start_y)
     distance = math.sqrt((delta_x)**2 + (delta_y)**2)
     print('walk distance')
     print(distance)
@@ -76,7 +76,9 @@ def travels(iterations):
         print('Iteration')
         print(i)
         walks[i] = distance()
-        #put a with statement here so it prints the distance to a file
+        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Single_Point\Distances.txt', 'a') as d:
+            d.write(str(walks[i]))
+            d.write('\n')
 
     return walks
 
@@ -86,21 +88,14 @@ ycoords = list(range(3000))
 timesteps = list(range(1,1001)) # Number of steps in each walk, integers from 1 to 1000 inclusive
 initial_position = [1500,1500] #Initial x,y coordinates of spectrin for each walk
 iterations = list(range(1000000)) # Number of walks that I want to simulate
+multiwalks = travels(iterations)
 
-# SCATTER PLOT - Code to visualise a single random walk as a scatter plot for a given number of steps
+#SCATTER PLOT - Code to visualise a single random walk as a scatter plot for a given number of steps
 #route = walk(initial_position, timesteps)
 #plt.scatter(route[:,0], route[:,1])
+#plt.title('100,000 Step Single Point Particle Random Walk')
 #plt.xlabel('x Coordinate')
 #plt.ylabel('y Coordinate')
-#plt.xlim(0,100)
-#plt.ylim(0,100)
+#plt.xlim(0,200)
+#plt.ylim(0,200)
 #plt.show()
-
-# HISTOGRAM - Code to find mean distance travelled and plot a histogram of distances for a given number of walks
-multiwalks = travels(iterations)
-avg_walk = np.mean(multiwalks)
-print(avg_walk)
-hist_plot = plt.hist(multiwalks, bins = 25)
-plt.xlabel('End to End Distance of Random Walk')
-plt.ylabel('Frequency')
-plt.show(hist_plot)
