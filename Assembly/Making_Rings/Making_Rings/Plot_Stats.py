@@ -12,7 +12,7 @@ avg_walk = np.mean(distances)
 print(avg_walk)
 
 #Plotting histogram of walk distances
-hist_plot = plt.hist(distances, bins = 25)
+hist_plot = plt.hist(distances, bins = 35)
 plt.xlabel('End to End Distance of Random Walk')
 plt.ylabel('Frequency')
 plt.show(hist_plot)

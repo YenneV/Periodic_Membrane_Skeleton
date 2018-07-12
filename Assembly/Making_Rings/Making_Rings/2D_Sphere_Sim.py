@@ -24,6 +24,7 @@ for i in steps:
             plt.xlabel('x Coordinate')
             plt.ylabel('y Coordinate')
             plt.grid()
+            plt.axis('equal')
             plt.title('Step = {}'.format(i))
             plt.xlim(0,xmax)
             plt.ylim(0,ymax)
