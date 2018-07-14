@@ -23,9 +23,9 @@ class Particle:
         return distance
 
 # Initialising a few objects of the class, Particles
-spectrin1 = Particle([50,50], 2)
-spectrin2 = Particle([20,30], 2)
-spectrin3 = Particle([10,10], 2)
+spectrin1 = Particle([50,50], 10)
+spectrin2 = Particle([20,30], 10)
+spectrin3 = Particle([10,10], 10)
 
 # Setting up some parameters for the simulation cell and the number of steps 
 xcoords = list(range(100)) #Length 100
@@ -60,6 +60,9 @@ def step(initial):
 def validate(mover, trial_move, xrange, yrange):
     x = trial_move[0]
     y = trial_move[1]
+    #find the valid range of x values for any move, and same for y, and return as list
+    validx = list(range((min(xrange) + mover.radius), (max(xrange) - mover.radius))) # new part 
+    validy = list(range((min(yrange) + mover.radius), (max(yrange) - mover.radius))) # new part
     mover.position = trial_move
     moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
     iterations = list(range(0,3)) #List of 0,1,2 - think of a better way of doing this
@@ -70,7 +73,7 @@ def validate(mover, trial_move, xrange, yrange):
     closest = np.min(neighbourdist)
     print(closest)
     accept = True
-    if x not in xrange or y not in yrange:
+    if x not in validx or y not in validy:
         accept = False
         print('step rejected - out of range')
     elif closest < mindist:

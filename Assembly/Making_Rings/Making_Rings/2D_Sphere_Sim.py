@@ -14,6 +14,9 @@ for i in steps:
             data = np.genfromtxt(p, dtype = int, delimiter = " ")
             xcoords = data[:,0]
             ycoords = data[:,1]
+            plt.axis('square')
+            plt.xlim((0,100))
+            plt.ylim((0,100))
             circle1 = plt.Circle((xcoords[0],ycoords[0]), radius = 10, fc = 'r')
             circle2 = plt.Circle((xcoords[1],ycoords[1]), radius = 10, fc = 'g')
             circle3 = plt.Circle((xcoords[2],ycoords[2]), radius = 10, fc = 'b')
@@ -24,10 +27,7 @@ for i in steps:
             plt.xlabel('x Coordinate')
             plt.ylabel('y Coordinate')
             plt.grid()
-            plt.axis('equal')
             plt.title('Step = {}'.format(i))
-            plt.xlim(0,xmax)
-            plt.ylim(0,ymax)
             plt.savefig('D:\Images\Multi_3_No_Overlap\image{}.pdf'.format(i), dpi=350)
             plt.close()
             #plt.show()
