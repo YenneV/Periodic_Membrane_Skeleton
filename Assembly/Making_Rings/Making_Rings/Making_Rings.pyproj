@@ -25,6 +25,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="2D_Sphere_Sim.py" />
+    <Compile Include="rigid_rod.py" />
     <Compile Include="Single_Spec.py" />
     <Compile Include="Multi_Spec.py" />
   </ItemGroup>
