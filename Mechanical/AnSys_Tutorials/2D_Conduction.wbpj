@@ -2,12 +2,13 @@
 <Storage>
   <Project Version="8.1">
     <base-designpoint-name valType="String">0</base-designpoint-name>
-    <timestamp-max valType="Int64">2815</timestamp-max>
+    <timestamp-max valType="Int64">3581</timestamp-max>
     <framework-build-version valType="String">18.2.109.0</framework-build-version>
     <external-version-string valType="String">Release 18.2</external-version-string>
-    <last-saved-utc valType="String">08/03/2018 17:27:23</last-saved-utc>
+    <last-saved-utc valType="String">08/04/2018 18:04:34</last-saved-utc>
     <logHistory valType="StringArray">
       <ArrayEntry Index="0">Student@ZIREAL:C:\Users\Student\AppData\Local\Temp\WorkbenchLogs\CoreEvents3368.log</ArrayEntry>
+      <ArrayEntry Index="1">Student@ZIREAL:C:\Users\Student\AppData\Local\Temp\WorkbenchLogs\CoreEvents6316.log</ArrayEntry>
     </logHistory>
     <expression-scope-container valType="String">Parameters</expression-scope-container>
     <project-type valType="String">WB2</project-type>
@@ -250,7 +251,27 @@
 "f55d8fdd-ea97-43cb-9b87-2360c51d066b": "/Units/Quantity:Quantity 193",
 "79a1e633-af86-4dd6-870f-7279d5a68710": "/Units/Quantity:Quantity 194",
 "d0adca1d-79b2-4044-b963-3ad59057e35b": "/Units/Quantity:Quantity 195",
-"ba361afa-5b0a-4fc3-9663-1d7d6b605823": "/Units/Quantity:Quantity 196"
+"ba361afa-5b0a-4fc3-9663-1d7d6b605823": "/Units/Quantity:Quantity 196",
+"bf00814d-1098-4900-a2d3-4d7b9604a894": "/FileContainer/FileReference:F4",
+"ae613da5-e9ee-48d6-b835-bed742915958": "/FileContainer/FileReference:F6",
+"1f9711ff-7aba-42eb-b56a-d59f6c1fe2a8": "/FileContainer/FileReference:F8",
+"8cfa400e-e382-497b-8d1c-37e3f3505893": "/FileTypesContainer/FileType:MechanicalFileType",
+"69cd1901-7a65-44ac-86dd-717178a4e344": "/FileContainer/FileReference:F7",
+"6da1ca3a-d68b-4db2-b6ef-f3d8c630cfbb": "/FileContainer/FileReference:F9",
+"963486a9-c197-4d10-9e14-358b51881cfb": "/Schematic/System:SYS 1",
+"e315343b-40da-4520-b0f1-b3cc9c93b10b": "/Schematic/Component:Engineering Data 1",
+"18a9cc9c-eab2-4c61-8a1c-b985a799f277": "/Schematic/Component:Geometry 1",
+"c30e5438-e4af-4c56-a2d2-1bc0636a94e3": "/Schematic/Component:Model 1",
+"af3c9457-1e60-410a-a1dc-b180ac8d29c7": "/Schematic/Component:Setup 1",
+"82f72771-7b7c-4ad2-ab0e-14841649587d": "/Schematic/Component:Solution 1",
+"113ef5b8-a369-4f33-b5a0-9b31daba1974": "/Schematic/Component:Results 1",
+"70e8a4e4-b5e6-42ac-982f-3c24ac61693e": "/ReportDataContainer/SystemSection:SYS 1",
+"3a78682a-fed7-4ba2-a074-7f94f0def48c": "/ReportDataContainer/CellSection:Engineering Data 3",
+"4de115c2-1d51-4b7b-aab6-ec59e5232649": "/ReportDataContainer/CellSection:Geometry 1",
+"296dd9ca-4c64-40e0-bda3-ce9d85ac773a": "/ReportDataContainer/CellSection:Model 3",
+"59f79ea9-a5c2-4dea-a28b-1d2106fb413b": "/ReportDataContainer/CellSection:Setup 1",
+"c7816eaa-570a-4e6f-b9d6-5e22f396386d": "/ReportDataContainer/CellSection:Solution 3",
+"1e6451e3-e41d-4189-8ce5-c7e6531cfef3": "/ReportDataContainer/CellSection:Results 1"
 }</ReferenceList>
       </ProjectReferenceList>
       <DesignPointReferenceListCollection>
@@ -326,7 +347,29 @@
 "01d6d3db-7886-4b40-9488-891b9a382a00": "/Model/SimulationModelGeneratedPMDB:SimulationModelGeneratedPMDB",
 "d10dcb26-41d9-4c60-88d7-544126c69d9b": "/Engineering Data/EngineeringData:Engineering Data",
 "e5efffe5-28bc-4a6b-aa02-35656328cd69": "/Geometry/Geometry:GeometryDataObject",
-"7fbc99ec-e774-4413-8c5c-d006606dd9db": "/Results/SimulationResultsStlZip:SimulationResultsStlZip"
+"7fbc99ec-e774-4413-8c5c-d006606dd9db": "/Results/SimulationResultsStlZip:SimulationResultsStlZip",
+"5b0eb43f-93b6-4679-8996-017fea264193": "/Model/MechanicalModel:MechanicalModel",
+"5be2d615-d4bc-46df-a86e-a3c4c8c9b824": "/Setup/SimulationSetup:SetupObject for Thermal|SteadyState|ANSYS",
+"5b3ce9c3-5781-49e3-b0e1-87718bcaa914": "/Solution/SimulationSolution:SolutionObject for Thermal|SteadyState|ANSYS",
+"3ac3d08b-3fde-4235-b465-0fd5c9c644a7": "/Results/SimulationResults:ResultsObject for Thermal|SteadyState|ANSYS",
+"99a8a9d6-1ec4-4976-9717-7ba4d69a5fba": "/Engineering Data/Material:Go Big Red",
+"6ee63d60-578f-40e3-8c29-33d87ed4260e": "/Engineering Data/MaterialProperty:Appearance 1",
+"809530dc-6655-4bde-a41b-f87e4d920a0b": "/Engineering Data/MaterialPropertyData:Color 1",
+"a6709409-596d-4cc3-880c-cccee240ae9c": "/Engineering Data/MaterialVariable:Red 1",
+"71ace402-1f7e-4151-b090-ec23976728d8": "/Engineering Data/MaterialVariable:Green 1",
+"743d80d0-1357-4921-a222-5b984596178a": "/Engineering Data/MaterialVariable:Blue 1",
+"e1c8b39f-be78-4b90-8d92-ce5a886714cf": "/Engineering Data/MaterialProperty:Thermal Conductivity 1",
+"076255a1-47d0-4c76-8ec8-ac18de34361f": "/Engineering Data/MaterialPropertyData:Thermal Conductivity 1",
+"862fce26-da60-4f4e-a315-7cd7a6cb4ceb": "/Engineering Data/MaterialVariable:Thermal Conductivity 1",
+"54265bd1-a13f-4cae-9510-f8275d04d051": "/Engineering Data/MaterialVariable:Temperature 6",
+"3a3a41cd-bb4d-4d26-adcd-890ba70152c7": "/Results 1/SimulationResults:ResultsObject for Thermal|SteadyState|ANSYS",
+"e9dcda55-c2ef-4bd6-8bd1-296bacd01b6f": "/Model 1/MechanicalModel:MechanicalModel",
+"4c968530-a604-45bc-8c62-0d319e46462d": "/Setup 1/SimulationSetup:SetupObject for Thermal|SteadyState|ANSYS",
+"59cc2c24-16b4-452f-beaa-f50c6109feb2": "/Solution 1/SimulationSolution:SolutionObject for Thermal|SteadyState|ANSYS",
+"b5063953-d028-4410-a2c6-25f079801e56": "/Model 1/SimulationEngineeringData:SimulationEngineeringDataObject",
+"f38ee539-27cc-407c-a370-cda2e3a605dd": "/Model 1/SimulationModelGeneratedMesh:SimulationModelGeneratedMesh",
+"351f0a84-8990-4e32-8ba6-c462c5c28fe9": "/Model 1/SimulationModelGeneratedPMDB:SimulationModelGeneratedPMDB",
+"6e6ad972-cbb6-4700-b7bc-41af675a3adf": "/Results 1/SimulationResultsStlZip:SimulationResultsStlZip"
 }</ReferenceList>
         </DesignPointReferenceList>
       </DesignPointReferenceListCollection>
@@ -349,7 +392,7 @@
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 2815, "Input": 1358, "Output": 1358}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3434, "Input": 1358, "Output": 1358}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
       <contains-significant-data valType="Boolean">false</contains-significant-data>
       <Object Name="/FileContainer/FileReference:F1" Version="1.0">
@@ -367,15 +410,240 @@
         <object-name valType="String">F3</object-name>
         <member-data valType="String">{"DisplayText": "EngineeringData.xml", "FileType": $$f19a07b2-e946-458c-87be-c2dd3a524b73, "DependentFiles": [], "ContainerAssociations": ["Engineering Data"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\SYS\ENGD\EngineeringData.xml", "ReferenceCount": 1}</member-data>
       </Object>
+      <Object Name="/FileContainer/FileReference:F4" Version="1.0">
+        <class-type valType="String">FileReference</class-type>
+        <object-name valType="String">F4</object-name>
+        <member-data valType="String">{"DisplayText": "material.engd", "FileType": $$f19a07b2-e946-458c-87be-c2dd3a524b73, "DependentFiles": [], "ContainerAssociations": ["Engineering Data"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\SYS\ENGD\material.engd", "ReferenceCount": 2}</member-data>
+      </Object>
+      <Object Name="/FileContainer/FileReference:F7" Version="1.0">
+        <class-type valType="String">FileReference</class-type>
+        <object-name valType="String">F7</object-name>
+        <member-data valType="String">{"DisplayText": "SYS.engd", "FileType": $$f19a07b2-e946-458c-87be-c2dd3a524b73, "DependentFiles": [], "ContainerAssociations": ["Model"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\global\MECH\SYS.engd", "ReferenceCount": 1}</member-data>
+      </Object>
+      <Object Name="/FileContainer/FileReference:F6" Version="1.0">
+        <class-type valType="String">FileReference</class-type>
+        <object-name valType="String">F6</object-name>
+        <member-data valType="String">{"DisplayText": "SYS.mechdb", "FileType": $$8cfa400e-e382-497b-8d1c-37e3f3505893, "DependentFiles": [], "ContainerAssociations": ["Model"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\global\MECH\SYS.mechdb", "ReferenceCount": 1}</member-data>
+      </Object>
+      <Object Name="/FileContainer/FileReference:F8" Version="1.0">
+        <class-type valType="String">FileReference</class-type>
+        <object-name valType="String">F8</object-name>
+        <member-data valType="String">{"DisplayText": "SYS-1.engd", "FileType": $$f19a07b2-e946-458c-87be-c2dd3a524b73, "DependentFiles": [], "ContainerAssociations": ["Model 1"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\global\MECH\SYS-1.engd", "ReferenceCount": 1}</member-data>
+      </Object>
+      <Object Name="/FileContainer/FileReference:F9" Version="1.0">
+        <class-type valType="String">FileReference</class-type>
+        <object-name valType="String">F9</object-name>
+        <member-data valType="String">{"DisplayText": "SYS-1.mechdb", "FileType": $$8cfa400e-e382-497b-8d1c-37e3f3505893, "DependentFiles": [], "ContainerAssociations": ["Setup 1", "Model 1"], "SkipForDesignPointDuplication": False, "IsDeletable": True, "ExternalSource": None, "LastDownloadFromRepository": -1, "Location": r"$(ProjectName)_files\dp0\global\MECH\SYS-1.mechdb", "ReferenceCount": 1}</member-data>
+      </Object>
     </Container>
     <Container Name="Messages" Version="1.0">
       <container-type valType="String">Project:Messages</container-type>
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 1359, "Input": 1359, "Output": 1359}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3326, "Input": 1359, "Output": 1359}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
       <contains-significant-data valType="Boolean">false</contains-significant-data>
+      <Object Name="/Messages/StoredMessage:Message" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 15:36:36
+License server lost for 5 minutes.  Please save your work.
+
+License server will time out in 55 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 15:36:36
+License server lost for 5 minutes.  Please save your work.
+
+License server will time out in 55 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 15:36:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 1" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 1</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 15:42:36
+License server lost for 10 minutes.  Please save your work.
+
+License server will time out in 50 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 15:42:36
+License server lost for 10 minutes.  Please save your work.
+
+License server will time out in 50 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 15:42:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 2" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 2</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 15:48:36
+License server lost for 15 minutes.  Please save your work.
+
+License server will time out in 45 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 15:48:36
+License server lost for 15 minutes.  Please save your work.
+
+License server will time out in 45 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 15:48:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 3" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 3</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 15:54:36
+License server lost for 20 minutes.  Please save your work.
+
+License server will time out in 40 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 15:54:36
+License server lost for 20 minutes.  Please save your work.
+
+License server will time out in 40 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 15:54:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 4" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 4</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 16:00:36
+License server lost for 25 minutes.  Please save your work.
+
+License server will time out in 35 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 16:00:36
+License server lost for 25 minutes.  Please save your work.
+
+License server will time out in 35 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:00:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 5" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 5</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 16:06:36
+License server lost for 30 minutes.  Please save your work.
+
+License server will time out in 30 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 16:06:36
+License server lost for 30 minutes.  Please save your work.
+
+License server will time out in 30 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:06:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 6" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 6</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 16:12:36
+License server lost for 35 minutes.  Please save your work.
+
+License server will time out in 25 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 16:12:36
+License server lost for 35 minutes.  Please save your work.
+
+License server will time out in 25 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:12:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 7" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 7</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 16:18:36
+License server lost for 40 minutes.  Please save your work.
+
+License server will time out in 20 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 16:18:36
+License server lost for 40 minutes.  Please save your work.
+
+License server will time out in 20 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:18:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 8" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 8</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Warning", "MessageCategory": "None", "Summary": """
+2018/08/04 16:24:36
+License server lost for 45 minutes.  Please save your work.
+
+License server will time out in 15 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """
+2018/08/04 16:24:36
+License server lost for 45 minutes.  Please save your work.
+
+License server will time out in 15 minutes if not reconnected before.
+
+Licensing path:
+        ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+        FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:24:36, "Visibility": "Warning", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
+      <Object Name="/Messages/StoredMessage:Message 9" Version="1.0">
+        <class-type valType="String">StoredMessage</class-type>
+        <object-name valType="String">Message 9</object-name>
+        <member-data valType="String">{"DisplayText": "Message", "MessageType": "Error", "MessageCategory": "None", "Summary": """The license server has timed out. Operations that require license checkout are not possible. You can continue your work once the license server is restored.
+Feature ANSYS Workbench Environment timed out. 
+    ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+    FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Details": """The license server has timed out. Operations that require license checkout are not possible. You can continue your work once the license server is restored.
+Feature ANSYS Workbench Environment timed out. 
+    ANSYSLI_SERVERS: 2325@ansyslm.shef.ac.uk 
+    FLEXlm Servers: 1055@ansyslm.shef.ac.uk""", "Association": "", "DateTimeStamp": 08/04/2018 16:30:36, "Visibility": "Error", "MessageSourceContainer": None, "MessageSourceEntity": None, "AdditionalMessageData": None, "DesignPoint": None}</member-data>
+      </Object>
     </Container>
     <Container Name="Parameters" Version="1.0">
       <container-type valType="String">Ansys.ParameterManager.ParameterManagerAddin:parameters</container-type>
@@ -384,13 +652,14 @@
       <maxUpdateOrder valType="Double">1</maxUpdateOrder>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 1364, "Input": 1363, "Output": 1362}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3576, "Input": 3577, "Output": 1362}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
-      <contains-significant-data valType="Boolean">false</contains-significant-data>
+      <contains-significant-data valType="Boolean">true</contains-significant-data>
       <Object Name="/Parameters/DesignPoint:0" Version="1.0">
         <class-type valType="String">DesignPoint</class-type>
         <object-name valType="String">0</object-name>
-        <member-data valType="String">{"DisplayText": "DP 0", "JustDuplicated": False, "PartiallyRetainedData": [], "ValidRetainedData": [], "ErrorsOnLastUpdate": {}, "LastUpdateInformation": {}, "Parameters": {}, "ParameterErrors": {}, "CurrentValues": {}, "ParameterStatus": {}, "Note": None, "IsUpToDate": False, "Exported": True, "Retained": True, "CurrentStateExported": False, "IsDataModelValid": True, "HasRetainedData": True, "HasBeenSolved": False, "UpdateOrder": 1}</member-data>
+        <member-data valType="String">{"DisplayText": "DP 0", "JustDuplicated": False, "PartiallyRetainedData": [], "ValidRetainedData": [], "ErrorsOnLastUpdate": {}, "LastUpdateInformation": {"DidUpdate": "True", "DidPreRsmUpdate": "False", "UpdatedComponents": "Model 1 in SYS 1"}, "Parameters": {}, "ParameterErrors": {}, "CurrentValues": {}, "ParameterStatus": {}, "Note": None, "IsUpToDate": True, "Exported": True, "Retained": True, "CurrentStateExported": False, "IsDataModelValid": True, "HasRetainedData": True, "HasBeenSolved": True, "UpdateOrder": 1}</member-data>
+        <properties-setByUserFlag-data valType="String">["IsDataModelValid"]</properties-setByUserFlag-data>
       </Object>
       <Object Name="/Parameters/DesignPointReportSetting:Design Points Report Setting" Version="1.0">
         <class-type valType="String">DesignPointReportSetting</class-type>
@@ -405,13 +674,20 @@
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 2678, "Input": 2753, "Output": 1365}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3545, "Input": 3555, "Output": 1365}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
-      <contains-significant-data valType="Boolean">false</contains-significant-data>
+      <contains-significant-data valType="Boolean">true</contains-significant-data>
       <Object Name="/Schematic/System:SYS" Version="1.0">
         <class-type valType="String">System</class-type>
         <object-name valType="String">SYS</object-name>
-        <member-data valType="String">{"DisplayText": "Steady-State Thermal", "Components": [$$615f605b-3a70-4c49-a7d7-b28f84026068, $$d6b3605d-5557-4267-ba8a-6932605e908a, $$b93ef35e-18d5-41fa-9134-23f802a7e5a0, $$ebbfce78-7663-4db9-8e69-7570f8e0439b, $$71e8bea4-cf7e-44bf-a723-7c95d8a9afb6, $$759330f4-5fe0-4c94-bb43-e34d5b50b320], "ComponentGroups": [], "SystemVisible": True, "RequiredComponents": [$$b93ef35e-18d5-41fa-9134-23f802a7e5a0, $$ebbfce78-7663-4db9-8e69-7570f8e0439b], "ExcludedComponentTemplates": [], "Attributes": {"PhysicsType": "Thermal", "AnalysisType": "SteadyState", "SolverType": "ANSYS", "SolverTypeDisplayString": "Mechanical APDL", "PhysicsTypeDisplayString": "Thermal", "AnalysisTypeDisplayString": "Steady-State", "SystemName": "Steady-State Thermal (ANSYS)", "IsCreated": "True", "AlreadyInSystem": "Yes", "VOLATILE:SystemName": "SYS"}, "SystemType": "Steady-State Thermal (ANSYS)", "HeaderText": "Steady-State Thermal", "SystemTypeAbbreviation": "SYS", "UniqueSystemDirectoryName": "SYS", "Physics": [], "AnalysisType": None, "SystemHelpId": "wb2sb_ssthermalAN", "AdditionalSystemHelpId": None, "IsParametric": False, "CreatedFromTemplate": $$50b2be75-323a-477b-8c3f-5df830fdace1, "Notes": None, "LayoutChildren": [], "LayoutIndex": 1}</member-data>
+        <member-data valType="String">{"DisplayText": "Mesh 1", "Components": [$$615f605b-3a70-4c49-a7d7-b28f84026068, $$d6b3605d-5557-4267-ba8a-6932605e908a, $$b93ef35e-18d5-41fa-9134-23f802a7e5a0, $$ebbfce78-7663-4db9-8e69-7570f8e0439b, $$71e8bea4-cf7e-44bf-a723-7c95d8a9afb6, $$759330f4-5fe0-4c94-bb43-e34d5b50b320], "ComponentGroups": [], "SystemVisible": True, "RequiredComponents": [$$b93ef35e-18d5-41fa-9134-23f802a7e5a0, $$ebbfce78-7663-4db9-8e69-7570f8e0439b], "ExcludedComponentTemplates": [], "Attributes": {"PhysicsType": "Thermal", "AnalysisType": "SteadyState", "SolverType": "ANSYS", "SolverTypeDisplayString": "Mechanical APDL", "PhysicsTypeDisplayString": "Thermal", "AnalysisTypeDisplayString": "Steady-State", "SystemName": "Steady-State Thermal (ANSYS)", "IsCreated": "True", "AlreadyInSystem": "Yes", "VOLATILE:SystemName": "SYS"}, "SystemType": "Steady-State Thermal (ANSYS)", "HeaderText": "Steady-State Thermal", "SystemTypeAbbreviation": "SYS", "UniqueSystemDirectoryName": "SYS", "Physics": [], "AnalysisType": None, "SystemHelpId": "wb2sb_ssthermalAN", "AdditionalSystemHelpId": None, "IsParametric": False, "CreatedFromTemplate": $$50b2be75-323a-477b-8c3f-5df830fdace1, "Notes": None, "LayoutChildren": [$$963486a9-c197-4d10-9e14-358b51881cfb], "LayoutIndex": 1}</member-data>
+        <properties-setByUserFlag-data valType="String">["DisplayText"]</properties-setByUserFlag-data>
+      </Object>
+      <Object Name="/Schematic/System:SYS 1" Version="1.0">
+        <class-type valType="String">System</class-type>
+        <object-name valType="String">SYS 1</object-name>
+        <member-data valType="String">{"DisplayText": "Mesh 2", "Components": [$$e315343b-40da-4520-b0f1-b3cc9c93b10b, $$18a9cc9c-eab2-4c61-8a1c-b985a799f277, $$c30e5438-e4af-4c56-a2d2-1bc0636a94e3, $$af3c9457-1e60-410a-a1dc-b180ac8d29c7, $$82f72771-7b7c-4ad2-ab0e-14841649587d, $$113ef5b8-a369-4f33-b5a0-9b31daba1974], "ComponentGroups": [], "SystemVisible": True, "RequiredComponents": [$$c30e5438-e4af-4c56-a2d2-1bc0636a94e3, $$af3c9457-1e60-410a-a1dc-b180ac8d29c7], "ExcludedComponentTemplates": [], "Attributes": {"PhysicsType": "Thermal", "AnalysisType": "SteadyState", "SolverType": "ANSYS", "SolverTypeDisplayString": "Mechanical APDL", "PhysicsTypeDisplayString": "Thermal", "AnalysisTypeDisplayString": "Steady-State", "SystemName": "Steady-State Thermal (ANSYS)", "IsCreated": "True", "AlreadyInSystem": "Yes", "VOLATILE:SystemName": "SYS 1"}, "SystemType": "Steady-State Thermal (ANSYS)", "HeaderText": "Steady-State Thermal", "SystemTypeAbbreviation": "SYS", "UniqueSystemDirectoryName": "SYS-1", "Physics": [], "AnalysisType": None, "SystemHelpId": "wb2sb_ssthermalAN", "AdditionalSystemHelpId": None, "IsParametric": False, "CreatedFromTemplate": $$50b2be75-323a-477b-8c3f-5df830fdace1, "Notes": None, "LayoutChildren": [], "LayoutIndex": 0}</member-data>
+        <properties-setByUserFlag-data valType="String">["DisplayText"]</properties-setByUserFlag-data>
       </Object>
       <Object Name="/Schematic/SchematicSettings:Schematic Settings" Version="1.0">
         <class-type valType="String">SchematicSettings</class-type>
@@ -471,7 +747,7 @@
       <Object Name="/Schematic/Component:Model" Version="1.0">
         <class-type valType="String">Component</class-type>
         <object-name valType="String">Model</object-name>
-        <member-data valType="String">{"DisplayText": "Model", "ImageName": "model2", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Model", "_overwrittenUpdatable": None, "Template": $$ca543df6-b4fb-4482-bc7f-bcf09c679a28, "InSystem": $$909f3d65-f8e3-4486-b816-70eea5a9084a, "MasterSources": {"Sources": [[{"DataType": "EngineeringData", "Component": $$615f605b-3a70-4c49-a7d7-b28f84026068, "Transfer": None}], [{"DataType": "Geometry", "Component": $$d6b3605d-5557-4267-ba8a-6932605e908a, "Transfer": None}]]}, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": "", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+        <member-data valType="String">{"DisplayText": "Model", "ImageName": "model2", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Model", "_overwrittenUpdatable": None, "Template": $$ca543df6-b4fb-4482-bc7f-bcf09c679a28, "InSystem": $$909f3d65-f8e3-4486-b816-70eea5a9084a, "MasterSources": {"Sources": [[{"DataType": "EngineeringData", "Component": $$615f605b-3a70-4c49-a7d7-b28f84026068, "Transfer": None}], [{"DataType": "Geometry", "Component": $$d6b3605d-5557-4267-ba8a-6932605e908a, "Transfer": None}]]}, "Notes": None, "UsedLicenses": {}, "ActiveTransferComponents": [], "Solver": "", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
       </Object>
       <Object Name="/Schematic/Component:Setup" Version="1.0">
         <class-type valType="String">Component</class-type>
@@ -488,6 +764,36 @@
         <object-name valType="String">Results</object-name>
         <member-data valType="String">{"DisplayText": "Results", "ImageName": "results", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Results", "_overwrittenUpdatable": None, "Template": $$1ff2129c-cdcc-4390-aca6-e8de992c63fe, "InSystem": $$909f3d65-f8e3-4486-b816-70eea5a9084a, "MasterSources": {"Sources": [[{"DataType": "SimulationSolution", "Component": $$71e8bea4-cf7e-44bf-a723-7c95d8a9afb6, "Transfer": None}]]}, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": "ANSYS", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
       </Object>
+      <Object Name="/Schematic/Component:Engineering Data 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Engineering Data 1</object-name>
+        <member-data valType="String">{"DisplayText": "Engineering Data", "ImageName": "EngDataComponent16x16", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": [], "CoupledClients": [], "SubComponents": [], "DataSharedFrom": $$615f605b-3a70-4c49-a7d7-b28f84026068, "DataSharing": "Full", "DataContainer": "Engineering Data", "_overwrittenUpdatable": None, "Template": $$b685ec15-e559-4624-bc97-c8a69620453f, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": None, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": None, "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
+      <Object Name="/Schematic/Component:Geometry 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Geometry 1</object-name>
+        <member-data valType="String">{"DisplayText": "Geometry", "ImageName": "cad_spaceclaim", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": [], "CoupledClients": [], "SubComponents": [], "DataSharedFrom": $$d6b3605d-5557-4267-ba8a-6932605e908a, "DataSharing": "Full", "DataContainer": "Geometry", "_overwrittenUpdatable": None, "Template": $$08fc08c6-a70c-4510-8f04-b74dcf4a1a42, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": None, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": None, "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
+      <Object Name="/Schematic/Component:Model 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Model 1</object-name>
+        <member-data valType="String">{"DisplayText": "Model", "ImageName": "model2", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Model 1", "_overwrittenUpdatable": None, "Template": $$ca543df6-b4fb-4482-bc7f-bcf09c679a28, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": {"Sources": [[{"DataType": "EngineeringData", "Component": $$e315343b-40da-4520-b0f1-b3cc9c93b10b, "Transfer": None}], [{"DataType": "Geometry", "Component": $$18a9cc9c-eab2-4c61-8a1c-b985a799f277, "Transfer": None}]]}, "Notes": None, "UsedLicenses": {}, "ActiveTransferComponents": [], "Solver": "", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
+      <Object Name="/Schematic/Component:Setup 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Setup 1</object-name>
+        <member-data valType="String">{"DisplayText": "Setup", "ImageName": "setup", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Setup 1", "_overwrittenUpdatable": None, "Template": $$253ce46b-ce91-4b51-8dd8-d744fd832a4f, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": {"Sources": [[{"DataType": "MechanicalModel", "Component": $$c30e5438-e4af-4c56-a2d2-1bc0636a94e3, "Transfer": None}], [{"DataType": "MechanicalMesh", "Component": $$c30e5438-e4af-4c56-a2d2-1bc0636a94e3, "Transfer": None}]]}, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": "ANSYS", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
+      <Object Name="/Schematic/Component:Solution 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Solution 1</object-name>
+        <member-data valType="String">{"DisplayText": "Solution", "ImageName": "Mechanical_Solution", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Solution 1", "_overwrittenUpdatable": None, "Template": $$dccd7ef2-00a8-4940-bbd4-5a2283d01626, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": {"Sources": [[{"DataType": "SimulationSetup", "Component": $$af3c9457-1e60-410a-a1dc-b180ac8d29c7, "Transfer": None}]]}, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": "ANSYS", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
+      <Object Name="/Schematic/Component:Results 1" Version="1.0">
+        <class-type valType="String">Component</class-type>
+        <object-name valType="String">Results 1</object-name>
+        <member-data valType="String">{"DisplayText": "Results", "ImageName": "results", "ComponentStateOnLastFailure": "UpToDate", "AlwaysBePartOfDpUpdate": False, "FullyUpToDateOnDps": None, "CoupledClients": [], "SubComponents": [], "DataSharedFrom": None, "DataSharing": "None", "DataContainer": "Results 1", "_overwrittenUpdatable": None, "Template": $$1ff2129c-cdcc-4390-aca6-e8de992c63fe, "InSystem": $$963486a9-c197-4d10-9e14-358b51881cfb, "MasterSources": {"Sources": [[{"DataType": "SimulationSolution", "Component": $$82f72771-7b7c-4ad2-ab0e-14841649587d, "Transfer": None}]]}, "Notes": None, "UsedLicenses": None, "ActiveTransferComponents": [], "Solver": "ANSYS", "IsFailedState": False, "UpdateConditionParameter": None}</member-data>
+      </Object>
     </Container>
     <Container Name="ReportDataContainer" Version="1.0">
       <container-type valType="String">Ansys.ProjectReporting.Addin:ReportDataContainer</container-type>
@@ -495,9 +801,9 @@
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 1841, "Input": 2738, "Output": 1628}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3346, "Input": 3526, "Output": 1628}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
-      <contains-significant-data valType="Boolean">false</contains-significant-data>
+      <contains-significant-data valType="Boolean">true</contains-significant-data>
       <Object Name="/ReportDataContainer/ReportDocument:Document" Version="1.0">
         <class-type valType="String">ReportDocument</class-type>
         <object-name valType="String">Document</object-name>
@@ -531,7 +837,7 @@
       <Object Name="/ReportDataContainer/ReportSection:ProjectContents" Version="1.0">
         <class-type valType="String">ReportSection</class-type>
         <object-name valType="String">ProjectContents</object-name>
-        <member-data valType="String">{"DisplayText": "ProjectContents", "IsActive": True, "SectionContents": [], "SubSections": [$$4ed31c3e-d89d-4281-85d1-22e5fe43b24e]}</member-data>
+        <member-data valType="String">{"DisplayText": "ProjectContents", "IsActive": True, "SectionContents": [], "SubSections": [$$4ed31c3e-d89d-4281-85d1-22e5fe43b24e, $$70e8a4e4-b5e6-42ac-982f-3c24ac61693e]}</member-data>
       </Object>
       <Object Name="/ReportDataContainer/ReportSection:Conclusions" Version="1.0">
         <class-type valType="String">ReportSection</class-type>
@@ -547,6 +853,11 @@
         <class-type valType="String">SystemSection</class-type>
         <object-name valType="String">SYS</object-name>
         <member-data valType="String">{"DisplayText": "SYS", "IsActive": True, "SectionContents": [], "SubSections": [$$52e36923-4a5f-4bf0-bf88-03052b1a751f, $$ceedf311-1193-45f2-8b59-59cc87d1f515, $$364bda10-5f26-48b7-8740-edf5d1865145, $$fca5b35a-f281-4725-b08e-0a37ee267676, $$feed2eb4-00d1-48fb-afd8-788b96f7c19b, $$ae14daa6-e4f0-49b6-ae91-606061507700], "IncludeSystemImage": True, "SystemSource": $$909f3d65-f8e3-4486-b816-70eea5a9084a}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/SystemSection:SYS 1" Version="1.0">
+        <class-type valType="String">SystemSection</class-type>
+        <object-name valType="String">SYS 1</object-name>
+        <member-data valType="String">{"DisplayText": "SYS 1", "IsActive": True, "SectionContents": [], "SubSections": [$$3a78682a-fed7-4ba2-a074-7f94f0def48c, $$4de115c2-1d51-4b7b-aab6-ec59e5232649, $$296dd9ca-4c64-40e0-bda3-ce9d85ac773a, $$59f79ea9-a5c2-4dea-a28b-1d2106fb413b, $$c7816eaa-570a-4e6f-b9d6-5e22f396386d, $$1e6451e3-e41d-4189-8ce5-c7e6531cfef3], "IncludeSystemImage": True, "SystemSource": $$963486a9-c197-4d10-9e14-358b51881cfb}</member-data>
       </Object>
       <Object Name="/ReportDataContainer/CellSection:Model 1" Version="1.0">
         <class-type valType="String">CellSection</class-type>
@@ -578,6 +889,36 @@
         <object-name valType="String">Results</object-name>
         <member-data valType="String">{"DisplayText": "Results", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$759330f4-5fe0-4c94-bb43-e34d5b50b320}</member-data>
       </Object>
+      <Object Name="/ReportDataContainer/CellSection:Model 3" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Model 3</object-name>
+        <member-data valType="String">{"DisplayText": "Model 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$c30e5438-e4af-4c56-a2d2-1bc0636a94e3}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/CellSection:Setup 1" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Setup 1</object-name>
+        <member-data valType="String">{"DisplayText": "Setup 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$af3c9457-1e60-410a-a1dc-b180ac8d29c7}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/CellSection:Geometry 1" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Geometry 1</object-name>
+        <member-data valType="String">{"DisplayText": "Geometry 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$18a9cc9c-eab2-4c61-8a1c-b985a799f277}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/CellSection:Engineering Data 3" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Engineering Data 3</object-name>
+        <member-data valType="String">{"DisplayText": "Engineering Data 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$e315343b-40da-4520-b0f1-b3cc9c93b10b}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/CellSection:Solution 3" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Solution 3</object-name>
+        <member-data valType="String">{"DisplayText": "Solution 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$82f72771-7b7c-4ad2-ab0e-14841649587d}</member-data>
+      </Object>
+      <Object Name="/ReportDataContainer/CellSection:Results 1" Version="1.0">
+        <class-type valType="String">CellSection</class-type>
+        <object-name valType="String">Results 1</object-name>
+        <member-data valType="String">{"DisplayText": "Results 1", "IsActive": True, "SectionContents": [], "SubSections": [], "CellSource": $$113ef5b8-a369-4f33-b5a0-9b31daba1974}</member-data>
+      </Object>
     </Container>
     <Container Name="Graphics" Version="1.0">
       <container-type valType="String">Ansys.Graphics.GraphicsAddin:graphics</container-type>
@@ -585,7 +926,7 @@
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
       <last-updated valType="Int64">0</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 2586, "Input": 1638, "Output": 1638}</last-modified-by-usage>
+      <last-modified-by-usage valType="String">{"Extrinsic": 3244, "Input": 1638, "Output": 1638}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
       <contains-significant-data valType="Boolean">false</contains-significant-data>
     </Container>
