@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="2D_Rod_Sim.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Plot_Stats.py">
       <SubType>Code</SubType>
     </Compile>
