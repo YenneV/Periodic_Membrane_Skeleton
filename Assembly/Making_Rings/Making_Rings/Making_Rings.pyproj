@@ -27,15 +27,16 @@
     <Compile Include="Particle.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Plot_Stats.py">
+    <Compile Include="Point_Particle\Plot_Stats.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="2D_Sphere_Sim.py" />
     <Compile Include="rigid_rod.py" />
-    <Compile Include="Single_Spec.py" />
+    <Compile Include="Point_Particle\Single_Spec.py" />
     <Compile Include="Multi_Spec.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Point_Particle\" />
     <Folder Include="Results\" />
     <Folder Include="Results\Multi_Point\" />
     <Folder Include="Results\Single_Point\" />

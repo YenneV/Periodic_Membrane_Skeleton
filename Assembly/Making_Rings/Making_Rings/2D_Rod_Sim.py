@@ -6,7 +6,7 @@ import numpy as np
 # I'll need to input some variables
 xmax = 100 #Specify the max xcoord of the cell you used
 ymax = 100 #Specify the max ycoord of the cell you used
-steps = list(range(1000)) #Specify the number of steps in the walk so I can read in the right number of files
+steps = list(range(10000)) #Specify the number of steps in the walk so I can read in the right number of files
 
 for i in steps:
     if i%100 == 0:

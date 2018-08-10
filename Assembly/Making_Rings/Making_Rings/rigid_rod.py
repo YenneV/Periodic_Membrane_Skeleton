@@ -60,8 +60,8 @@ steps = list(range(10000)) #10000 Steps
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
 rod1 = Particle([50,50], 10, 2, 0)
 rod1.whereami([50,50], 0)
-rod2 = Particle([20,30], 10, 2, (3*math.pi/2))
-rod2.whereami([20,30], (3*math.pi/2))
+rod2 = Particle([20,30], 10, 2, (math.pi/6))
+rod2.whereami([20,30], (math.pi/6))
 rod3 = Particle([10,10], 10, 2, (math.pi/4))
 rod3.whereami([10,10], (math.pi/4))
 
@@ -99,7 +99,6 @@ def validate(mover, trial_move, xrange, yrange):
     validx = list(range((min(xrange) + mover.radius), (max(xrange) - mover.radius))) # new part 
     validy = list(range((min(yrange) + mover.radius), (max(yrange) - mover.radius))) # new part
     mover.whereami(trial_move[0:2], trial_move[2])
-
     moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
     #iterations = list(range(0,3)) #List of 0,1,2 - think of a better way of doing this
     #distances = np.zeros([1,3], dtype = float) #Array to hold distances of all particles from the mover
@@ -108,7 +107,7 @@ def validate(mover, trial_move, xrange, yrange):
     #neighbourdist = distances[distances != 0]
     #closest = np.min(neighbourdist)
     accept = True
-    if x not in validx or y not in validy:
+    if (int(mover.pointA[0]) or int(mover.pointC[0])) not in validx or (int(mover.pointA[1]) or int(mover.pointC[1])) not in validy:
         accept = False
         print('step rejected - out of range')
     #elif closest < mindist:
