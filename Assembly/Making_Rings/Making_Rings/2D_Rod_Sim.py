@@ -9,7 +9,7 @@ ymax = 100 #Specify the max ycoord of the cell you used
 steps = list(range(10000)) #Specify the number of steps in the walk so I can read in the right number of files
 
 for i in steps:
-    if i%100 == 0:
+    if i%250 == 0:
         with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'r') as p:
             data = np.genfromtxt(p, dtype = float, delimiter = " ")
             #Create an array for each particle with x,y coords of point A on one row, then of point C on row below
@@ -26,7 +26,7 @@ for i in steps:
             plt.ylabel('y Coordinate')
             plt.grid()
             plt.title('Step = {}'.format(i))
-            plt.savefig('D:\Images\RigidRod_Free\image{}.pdf'.format(i), dpi=350)
+            plt.savefig('D:\Images\RigidRod_Grid\image{}.pdf'.format(i), dpi=350)
             plt.close()
 
 

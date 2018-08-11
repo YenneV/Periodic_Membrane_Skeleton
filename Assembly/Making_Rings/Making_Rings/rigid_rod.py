@@ -58,8 +58,8 @@ steps = list(range(10000)) #10000 Steps
 #occ_grid = np.zeros((len(xcoords), len(ycoords)), dtype = bool) #grid of 'False' values for occupation
 
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
-rod1 = Particle([50,50], 10, 2, 0)
-rod1.whereami([50,50], 0)
+rod1 = Particle([88,88], 10, 2, 0)
+rod1.whereami([88,88], 0)
 rod2 = Particle([20,30], 10, 2, (math.pi/6))
 rod2.whereami([20,30], (math.pi/6))
 rod3 = Particle([10,10], 10, 2, (math.pi/4))
@@ -89,33 +89,34 @@ def step(initial, angle):
     return trial
 
 # Function takes a particle, a trial move and the cell limits, and returns true if 
-# the move is accepted and false if it is not (because it leaves the cell or gets 
-# too close to another particle
+# the move is accepted and false if it is not
 def validate(mover, trial_move, xrange, yrange):
-    x = trial_move[0] #redundant?
-    y = trial_move[1] #redundant?
-    angle = trial_move[2] #redundant?
     #find the valid range of x values for any move, and same for y, and return as list
-    validx = list(range((min(xrange) + mover.radius), (max(xrange) - mover.radius))) # new part 
-    validy = list(range((min(yrange) + mover.radius), (max(yrange) - mover.radius))) # new part
-    mover.whereami(trial_move[0:2], trial_move[2])
-    moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
-    #iterations = list(range(0,3)) #List of 0,1,2 - think of a better way of doing this
-    #distances = np.zeros([1,3], dtype = float) #Array to hold distances of all particles from the mover
-    #for j in iterations:
-    #    distances[:,j] = (Particle.instances[moverID].proximity(Particle.instances[j]))
-    #neighbourdist = distances[distances != 0]
-    #closest = np.min(neighbourdist)
-    accept = True
-    if (int(mover.pointA[0]) or int(mover.pointC[0])) not in validx or (int(mover.pointA[1]) or int(mover.pointC[1])) not in validy:
+    validx = list(range((min(xrange) + mover.radius), (max(xrange) - mover.radius))) 
+    validy = list(range((min(yrange) + mover.radius), (max(yrange) - mover.radius)))
+    mover.whereami(trial_move[0:2], trial_move[2]) #Runs function on trial move to update coords of A,B,C points
+    #moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
+    accept = False
+    if (int(mover.pointA[0])) not in validx:
         accept = False
-        print('step rejected - out of range')
-    #elif closest < mindist:
+    elif (int(mover.pointC[0])) not in validx:
+        accept = False
+    elif (int(mover.pointA[1])) not in validy:
+        accept = False
+    elif (int(mover.pointC[1])) not in validy:
+        accept = False
+    #if (int(mover.pointA[0])) or (int(mover.pointC[0])) not in validx:
     #    accept = False
-    #    print('step rejected - overlaps another particle')
+    #    print('step rejected - xcoordinate out of range')
+    #elif ((int(mover.pointA[1]) or int(mover.pointC[1])) not in validy:
+    #    accept = False
+    #    print('step rejected - ycoordinate out of range')
     else:
         accept = True
+        print('accepted with endpoints at:')
+        print(mover.output)
     return accept
+
 
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
 # to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
@@ -128,8 +129,7 @@ for i in steps:
     accept = validate(mover, trial_move, xcoords, ycoords) # function to return a yes or no
     if accept == True:
         mover.whereami(trial_move[0:2], trial_move[2])
-        print('move allowed to:')
-        print(mover.position)
+        print('move allowed')
     else:
         mover.whereami(initial_position, initial_angle)
         print('move not allowed, remains at:')
