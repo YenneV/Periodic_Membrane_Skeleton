@@ -26,7 +26,7 @@ for i in steps:
             plt.ylabel('y Coordinate')
             plt.grid()
             plt.title('Step = {}'.format(i))
-            plt.savefig('D:\Images\RigidRod_Grid\image{}.pdf'.format(i), dpi=350)
+            plt.savefig('D:\Images\RigidRod_XV\image{}.pdf'.format(i), dpi=350)
             plt.close()
 
 

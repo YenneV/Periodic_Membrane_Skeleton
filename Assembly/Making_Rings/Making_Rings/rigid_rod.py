@@ -45,6 +45,16 @@ class Particle:
         self.pointA = [(self.position[0] + self.Ax), (self.position[1] + self.Ay)]
         self.pointC = [(self.position[0] + self.Cx), (self.position[1]+ self.Cy)]
         self.output = self.pointA, self.pointC
+    def parametrise(self):
+        self.deltax = self.pointC[0] - self.pointA[0] # x component of direction vector from A to C
+        self.deltay = self.pointC[1] - self.pointA[1] # y component of direction vector from A to C
+        points = list(range(0,self.length + 1))
+        linecoords = []
+        for t in points:
+            xpoint = self.pointA[0] + t*(self.deltax/self.length) # delta x too big...divide both x and y by length?
+            ypoint = self.pointA[1] + t*(self.deltay/self.length)
+            linecoords.append([xpoint,ypoint])
+        return linecoords
     def proximity(self, other): #this is between centres of mass - i may not need this if i use a grid
         deltax = abs(other.position[0] - self.position[0])
         deltay = abs(other.position[1] - self.position[1])
@@ -54,7 +64,7 @@ class Particle:
 # Setting up some parameters for the simulation cell and the number of steps 
 xcoords = list(range(100)) #Length 100
 ycoords = list(range(100)) #Length 100
-steps = list(range(10000)) #10000 Steps
+steps = list(range(10)) #10000 Steps
 #occ_grid = np.zeros((len(xcoords), len(ycoords)), dtype = bool) #grid of 'False' values for occupation
 
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
@@ -62,8 +72,12 @@ rod1 = Particle([88,88], 10, 2, 0)
 rod1.whereami([88,88], 0)
 rod2 = Particle([20,30], 10, 2, (math.pi/6))
 rod2.whereami([20,30], (math.pi/6))
-rod3 = Particle([10,10], 10, 2, (math.pi/4))
-rod3.whereami([10,10], (math.pi/4))
+rod3 = Particle([10,10], 10, 2, (math.pi))
+rod3.whereami([10,10], (math.pi))
+
+rod1.parametrise()
+rod2.parametrise()
+rod3.parametrise()
 
 
 # 'step' function generates a trial move, based on an initial position
