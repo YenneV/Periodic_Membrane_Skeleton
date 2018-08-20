@@ -88,7 +88,7 @@ class Particle:
 # Setting up some parameters for the simulation cell and the number of steps 
 xcoords = list(range(100)) #Length of cell in x direction
 ycoords = list(range(100)) #Length of cell in y direction
-steps = list(range(10)) #Number of steps in my random walk
+steps = list(range(10000)) #Number of steps in my random walk
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
 rod1 = Particle([88,88], 10, 2, 0)
 rod1.whereami([88,88], 0)
@@ -97,9 +97,19 @@ rod2.whereami([30,30], (math.pi/6))
 rod3 = Particle([10,10], 10, 2, (math.pi))
 rod3.whereami([10,10], (math.pi))
 
-thing = rod1.neighbourdist(rod2)
-print(thing)
-
+# 'overlap' function takes a particle and uses neighbourlist and neighbourdist methods to figure out 
+# if this particle is too close to any other particle - [should only be called during validate as the 
+# whereami method needs to be called first to update position to trial move]
+def overlap(mover):
+    neighbours = mover.neighbourlist()
+    result = False
+    for i in range(0,len(neighbours)):
+        result = mover.neighbourdist(neighbours[i])
+        if result == True:
+            return result
+        else:
+            continue
+    return result
 
 
 # 'step' function generates a trial move, based on an initial position
@@ -135,22 +145,23 @@ def validate(mover, trial_move, xrange, yrange):
     accept = False
     if (int(mover.pointA[0])) not in validx:
         accept = False
+        print('A point out of bounds in x')
     elif (int(mover.pointC[0])) not in validx:
         accept = False
+        print('C point out of bounds in x')
     elif (int(mover.pointA[1])) not in validy:
         accept = False
+        print('A point out of bounds in y')
     elif (int(mover.pointC[1])) not in validy:
         accept = False
-    #if (int(mover.pointA[0])) or (int(mover.pointC[0])) not in validx:
-    #    accept = False
-    #    print('step rejected - xcoordinate out of range')
-    #elif ((int(mover.pointA[1]) or int(mover.pointC[1])) not in validy:
-    #    accept = False
-    #    print('step rejected - ycoordinate out of range')
+        print('C point out of bounds in y')
+    elif overlap(mover) == True:
+        accept = False
+        print('trial move would overlap another particle')
     else:
         accept = True
-        print('accepted with endpoints at:')
-        print(mover.output)
+        #print('accepted with endpoints at:')
+        #print(mover.output)
     return accept
 
 
@@ -165,11 +176,11 @@ for i in steps:
     accept = validate(mover, trial_move, xcoords, ycoords) # function to return a yes or no
     if accept == True:
         mover.whereami(trial_move[0:2], trial_move[2])
-        print('move allowed')
+        #print('move allowed')
     else:
         mover.whereami(initial_position, initial_angle)
-        print('move not allowed, remains at:')
-        print(mover.position)
+        #print('move not allowed, remains at:')
+        #print(mover.position)
     if i%10 == 0:
         with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'w') as f:
             f.write(str(rod1.pointA[0]))
