@@ -51,33 +51,55 @@ class Particle:
         points = list(range(0,self.length + 1))
         linecoords = []
         for t in points:
-            xpoint = self.pointA[0] + t*(self.deltax/self.length) # delta x too big...divide both x and y by length?
+            xpoint = self.pointA[0] + t*(self.deltax/self.length)
             ypoint = self.pointA[1] + t*(self.deltay/self.length)
             linecoords.append([xpoint,ypoint])
-        return linecoords
-    def proximity(self, other): #this is between centres of mass - i may not need this if i use a grid
-        deltax = abs(other.position[0] - self.position[0])
-        deltay = abs(other.position[1] - self.position[1])
-        distance = math.sqrt(deltax**2 + deltay**2)
-        return distance
+        return linecoords #List of points generated is length + 1 as I need both endpoints
+    def neighbourlist(self):
+        neighbours = []
+        for i in range(0,len(Particle.instances)):
+            deltax = abs(Particle.instances[i].position[0] - self.position[0])
+            deltay = abs(Particle.instances[i].position[1] - self.position[1])
+            distance = math.sqrt(deltax**2 + deltay**2)
+            if distance < (self.length + 2*self.radius) and distance > 0:
+                neighbours.append(Particle.instances[i])
+            else:
+                continue
+        return neighbours
+    def neighbourdist(self, other):
+        set1 = self.parametrise()
+        set2 = other.parametrise()
+        overlap = False
+        for i in range(0,len(set1)):
+            for j in range(0,len(set2)):
+                deltax = abs(set1[i][0] - set2[j][0])
+                deltay = abs(set1[i][1] - set2[j][1])
+                distance = math.sqrt(deltax**2 + deltay**2)
+                if distance < 2*self.radius:
+                    overlap = True
+                    return overlap #the return statement here should stop everything if condition is true
+                else:
+                    continue #if condition is false then we continue to iterate
+        return overlap
 
+
+
+# SETTING UP INITIAL VALUES AND INITIALISING PARTICLES
 # Setting up some parameters for the simulation cell and the number of steps 
-xcoords = list(range(100)) #Length 100
-ycoords = list(range(100)) #Length 100
-steps = list(range(10)) #10000 Steps
-#occ_grid = np.zeros((len(xcoords), len(ycoords)), dtype = bool) #grid of 'False' values for occupation
-
+xcoords = list(range(100)) #Length of cell in x direction
+ycoords = list(range(100)) #Length of cell in y direction
+steps = list(range(10)) #Number of steps in my random walk
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
 rod1 = Particle([88,88], 10, 2, 0)
 rod1.whereami([88,88], 0)
-rod2 = Particle([20,30], 10, 2, (math.pi/6))
-rod2.whereami([20,30], (math.pi/6))
+rod2 = Particle([30,30], 10, 2, (math.pi/6))
+rod2.whereami([30,30], (math.pi/6))
 rod3 = Particle([10,10], 10, 2, (math.pi))
 rod3.whereami([10,10], (math.pi))
 
-rod1.parametrise()
-rod2.parametrise()
-rod3.parametrise()
+thing = rod1.neighbourdist(rod2)
+print(thing)
+
 
 
 # 'step' function generates a trial move, based on an initial position
