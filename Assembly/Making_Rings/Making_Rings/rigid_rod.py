@@ -7,19 +7,21 @@ import random
 random.seed(10)
 
 # Creating Class for rod-like objects
-class Particle:
+class RigidRod:
     instances = []
     def __init__(self, position, length, radius, orientation):
         self.initialposition = position
         self.length = length #rounded ends so this is total length-2R
         self.radius = radius
         self.initialorientation = orientation #Angle in radians
-        Particle.instances.append(self) #Beware! If I need to delete particles later they won't be removed from this list!
+        RigidRod.instances.append(self) #Beware! If I need to delete particles later they won't be removed from this list!
     def whereami(self, newcoords, orientation):
         self.position = newcoords
         self.orientation = orientation
-        if self.orientation >= 2*math.pi: #This keeps the angle between 0 and less than 2pi
+        if self.orientation >= 2*math.pi: #This keeps the angle positive, between 0 and less than 2pi
             self.orientation = self.orientation - 2*math.pi
+        elif self.orientation < 0:
+            self.orientation = self.orientation + 2*math.pi
         #Finding the end points depending on the angle
         if math.pi/2 > self.orientation >= 0:
             self.Ax = -(self.length*math.cos(self.orientation))/2  #This should be the amount that we go back in x by to get left pt
@@ -57,12 +59,12 @@ class Particle:
         return linecoords #List of points generated is length + 1 as I need both endpoints
     def neighbourlist(self):
         neighbours = []
-        for i in range(0,len(Particle.instances)):
-            deltax = abs(Particle.instances[i].position[0] - self.position[0])
-            deltay = abs(Particle.instances[i].position[1] - self.position[1])
+        for i in range(0,len(RigidRod.instances)):
+            deltax = abs(RigidRod.instances[i].position[0] - self.position[0])
+            deltay = abs(RigidRod.instances[i].position[1] - self.position[1])
             distance = math.sqrt(deltax**2 + deltay**2)
             if distance < (self.length + 2*self.radius) and distance > 0:
-                neighbours.append(Particle.instances[i])
+                neighbours.append(RigidRod.instances[i])
             else:
                 continue
         return neighbours
@@ -90,11 +92,11 @@ xcoords = list(range(100)) #Length of cell in x direction
 ycoords = list(range(100)) #Length of cell in y direction
 steps = list(range(10000)) #Number of steps in my random walk
 # Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
-rod1 = Particle([88,88], 10, 2, 0)
+rod1 = RigidRod([88,88], 10, 2, 0)
 rod1.whereami([88,88], 0)
-rod2 = Particle([30,30], 10, 2, (math.pi/6))
+rod2 = RigidRod([30,30], 10, 2, (math.pi/6))
 rod2.whereami([30,30], (math.pi/6))
-rod3 = Particle([10,10], 10, 2, (math.pi))
+rod3 = RigidRod([10,10], 10, 2, (math.pi))
 rod3.whereami([10,10], (math.pi))
 
 # 'overlap' function takes a particle and uses neighbourlist and neighbourdist methods to figure out 
@@ -117,7 +119,7 @@ def step(initial, angle):
     x = initial[0]
     y = initial[1]
 
-    step = random.randint(0,4)
+    step = random.randint(0,5)
     if step == 0:
         x += 1
     elif step == 1:
@@ -128,6 +130,8 @@ def step(initial, angle):
         y -= 1
     elif step == 4:
         angle += (math.pi/4)
+    elif step == 5:
+        angle -= (math.pi/4)
     else: #Not really necessary but just to make sure rand is drawn in range
         print('Step error - out of range')
 
@@ -169,7 +173,7 @@ def validate(mover, trial_move, xrange, yrange):
 # to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
 for i in steps:
     print(i)
-    mover = (random.choice(Particle.instances)) #Selects a particle to move
+    mover = (random.choice(RigidRod.instances)) #Selects a particle to move
     initial_position = mover.position
     initial_angle = mover.orientation
     trial_move = step(initial_position, initial_angle) #Returns list of [x,y,orientation]
