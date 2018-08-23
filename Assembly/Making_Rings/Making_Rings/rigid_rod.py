@@ -59,14 +59,17 @@ class RigidRod:
         return linecoords #List of points generated is length + 1 as I need both endpoints
     def neighbourlist(self):
         neighbours = []
+        #selfID = (RigidRod.instances.index(self))
+        #print('self ID is', selfID)
         for i in range(0,len(RigidRod.instances)):
             deltax = abs(RigidRod.instances[i].position[0] - self.position[0])
             deltay = abs(RigidRod.instances[i].position[1] - self.position[1])
             distance = math.sqrt(deltax**2 + deltay**2)
-            if distance < (self.length + 2*self.radius) and distance > 0:
+            if distance < (self.length + 2*self.radius):
                 neighbours.append(RigidRod.instances[i])
             else:
                 continue
+        neighbours.remove(self)
         return neighbours
     def neighbourdist(self, other):
         set1 = self.parametrise()
@@ -86,33 +89,7 @@ class RigidRod:
 
 
 
-# SETTING UP INITIAL VALUES AND INITIALISING PARTICLES
-# Setting up some parameters for the simulation cell and the number of steps 
-xcoords = list(range(100)) #Length of cell in x direction
-ycoords = list(range(100)) #Length of cell in y direction
-steps = list(range(10000)) #Number of steps in my random walk
-# Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
-rod1 = RigidRod([88,88], 10, 2, 0)
-rod1.whereami([88,88], 0)
-rod2 = RigidRod([30,30], 10, 2, (math.pi/6))
-rod2.whereami([30,30], (math.pi/6))
-rod3 = RigidRod([10,10], 10, 2, (math.pi))
-rod3.whereami([10,10], (math.pi))
-
-# 'overlap' function takes a particle and uses neighbourlist and neighbourdist methods to figure out 
-# if this particle is too close to any other particle - [should only be called during validate as the 
-# whereami method needs to be called first to update position to trial move]
-def overlap(mover):
-    neighbours = mover.neighbourlist()
-    result = False
-    for i in range(0,len(neighbours)):
-        result = mover.neighbourdist(neighbours[i])
-        if result == True:
-            return result
-        else:
-            continue
-    return result
-
+## FUNCTION DEFINITIONS ##
 
 # 'step' function generates a trial move, based on an initial position
 def step(initial, angle):
@@ -137,6 +114,20 @@ def step(initial, angle):
 
     trial = [x,y,angle]
     return trial
+
+# 'overlap' function takes a particle and uses neighbourlist and neighbourdist methods to figure out 
+# if this particle is too close to any other particle - [should only be called during validate as the 
+# whereami method needs to be called first to update position to trial move]
+def overlap(mover):
+    neighbours = mover.neighbourlist()
+    result = False
+    for i in range(0,len(neighbours)):
+        result = mover.neighbourdist(neighbours[i])
+        if result == True:
+            return result
+        else:
+            continue
+    return result
 
 # Function takes a particle, a trial move and the cell limits, and returns true if 
 # the move is accepted and false if it is not
@@ -168,7 +159,53 @@ def validate(mover, trial_move, xrange, yrange):
         #print(mover.output)
     return accept
 
+## END OF FUNCTION DEFINITIONS ##
 
+# SETTING UP INITIAL VALUES
+# Setting up some parameters for simulation cell and steps
+xcoords = list(range(100)) #Length of cell in x direction
+ycoords = list(range(100)) #Length of cell in y direction
+steps = list(range(10000)) #Number of steps in my random walk
+
+# INITIALISING PARTICLES
+length = 10
+radius = 2
+edge = radius + (length/2)
+nparticles = 75
+
+for i in range(1,nparticles + 1):
+    print('particle no', i)
+    startx = random.randint(min(xcoords) + edge, max(xcoords) - edge)
+    starty = random.randint(min(ycoords) + edge, max(ycoords) - edge)
+    start_theta = random.uniform(0, 2*math.pi)
+    varname = 'rod{}'.format(i)
+    varname = RigidRod([startx,starty], length, radius, start_theta)
+    varname.whereami([startx,starty], start_theta)
+    status = overlap(varname)
+    while status == True:
+        print('coords not acceptable', startx, starty)
+        newx = random.randint(min(xcoords) + edge, max(xcoords) - edge)
+        newy = random.randint(min(ycoords) + edge, max(ycoords) - edge)
+        new_theta = random.uniform(0, 2*math.pi)
+        varname.whereami([newx,newy], new_theta)
+        print('new position to try', varname.pointA, varname.pointC)
+        status = overlap(varname)
+        print('new status', status)
+
+
+
+
+
+
+# Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
+#rod1 = RigidRod([88,88], 10, 2, 0)
+#rod1.whereami([88,88], 0)
+#rod2 = RigidRod([30,30], 10, 2, (math.pi/6))
+#rod2.whereami([30,30], (math.pi/6))
+#rod3 = RigidRod([10,10], 10, 2, (math.pi))
+#rod3.whereami([10,10], (math.pi))
+
+## MAIN FUNCTION ##
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
 # to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
 for i in steps:
@@ -187,28 +224,57 @@ for i in steps:
         #print(mover.position)
     if i%10 == 0:
         with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'w') as f:
-            f.write(str(rod1.pointA[0]))
-            f.write(" ")
-            f.write(str(rod1.pointA[1]))
-            f.write(" ")
-            f.write(str(rod1.pointC[0]))
-            f.write(" ")
-            f.write(str(rod1.pointC[1]))
-            f.write('\n')
-            f.write(str(rod2.pointA[0]))
-            f.write(" ")
-            f.write(str(rod2.pointA[1]))
-            f.write(" ")
-            f.write(str(rod2.pointC[0]))
-            f.write(" ")
-            f.write(str(rod2.pointC[1]))
-            f.write('\n')
-            f.write(str(rod3.pointA[0]))
-            f.write(" ")
-            f.write(str(rod3.pointA[1]))
-            f.write(" ")
-            f.write(str(rod3.pointC[0]))
-            f.write(" ")
-            f.write(str(rod3.pointC[1]))
-            f.write('\n')
-            
+            for j in RigidRod.instances:
+                f.write(str(j.pointA[0]))
+                f.write(" ")
+                f.write(str(j.pointA[1]))
+                f.write(" ")
+                f.write(str(j.pointC[0]))
+                f.write(" ")
+                f.write(str(j.pointC[1]))
+                f.write('\n')
+    
+   
+## COPY OF RANDOM WALK LOOP ##
+# Random Walk - particle chosen at random, coordinates read in, 'step' function called
+# to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
+#for i in steps:
+#    print(i)
+#    mover = (random.choice(RigidRod.instances)) #Selects a particle to move
+#    initial_position = mover.position
+#    initial_angle = mover.orientation
+#    trial_move = step(initial_position, initial_angle) #Returns list of [x,y,orientation]
+#    accept = validate(mover, trial_move, xcoords, ycoords) # function to return a yes or no
+#    if accept == True:
+#        mover.whereami(trial_move[0:2], trial_move[2])
+#        #print('move allowed')
+#    else:
+#        mover.whereami(initial_position, initial_angle)
+#        #print('move not allowed, remains at:')
+#        #print(mover.position)
+#    if i%10 == 0:
+#        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'w') as f:
+#            f.write(str(rod1.pointA[0]))
+#            f.write(" ")
+#            f.write(str(rod1.pointA[1]))
+#            f.write(" ")
+#            f.write(str(rod1.pointC[0]))
+#            f.write(" ")
+#            f.write(str(rod1.pointC[1]))
+#            f.write('\n')
+#            f.write(str(rod2.pointA[0]))
+#            f.write(" ")
+#            f.write(str(rod2.pointA[1]))
+#            f.write(" ")
+#            f.write(str(rod2.pointC[0]))
+#            f.write(" ")
+#            f.write(str(rod2.pointC[1]))
+#            f.write('\n')
+#            f.write(str(rod3.pointA[0]))
+#            f.write(" ")
+#            f.write(str(rod3.pointA[1]))
+#            f.write(" ")
+#            f.write(str(rod3.pointC[0]))
+#            f.write(" ")
+#            f.write(str(rod3.pointC[1]))
+#            f.write('\n')
