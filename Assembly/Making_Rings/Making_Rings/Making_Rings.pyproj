@@ -24,6 +24,9 @@
     <Compile Include="2D_Rod_Sim.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="3D_Particle.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Particle.py">
       <SubType>Code</SubType>
     </Compile>

@@ -24,25 +24,25 @@ class RigidRod:
             self.orientation = self.orientation + 2*math.pi
         #Finding the end points depending on the angle
         if math.pi/2 > self.orientation >= 0:
-            self.Ax = -(self.length*math.cos(self.orientation))/2  #This should be the amount that we go back in x by to get left pt
-            self.Ay = -(self.length*math.sin(self.orientation))/2 #as above for y
-            self.Cx = (self.length*math.cos(self.orientation))/2  #amount we go along in x by to get right pt
-            self.Cy = (self.length*math.sin(self.orientation))/2 #as above for y
+            self.Ax = -abs((self.length*math.cos(self.orientation))/2)  #This should be the amount that we go back in x by to get left pt
+            self.Ay = -abs((self.length*math.sin(self.orientation))/2) #as above for y
+            self.Cx = abs((self.length*math.cos(self.orientation))/2)  #amount we go along in x by to get right pt
+            self.Cy = abs((self.length*math.sin(self.orientation))/2) #as above for y
         elif math.pi >= self.orientation >= math.pi/2:
-            self.Ax = (self.length*math.cos(self.orientation))/2  
-            self.Ay = -(self.length*math.sin(self.orientation))/2
-            self.Cx = -(self.length*math.cos(self.orientation))/2 
-            self.Cy = (self.length*math.sin(self.orientation))/2
-        elif (3*math.pi)/2 > self.orientation >= math.pi:
-            self.Ax = (self.length*math.cos(self.orientation))/2  
-            self.Ay = (self.length*math.sin(self.orientation))/2
-            self.Cx = -(self.length*math.cos(self.orientation))/2 
-            self.Cy = -(self.length*math.sin(self.orientation))/2
-        elif (2* math.pi) > self.orientation >= (3*math.pi)/2:
-            self.Ax = -(self.length*math.cos(self.orientation))/2  
-            self.Ay = (self.length*math.sin(self.orientation))/2
-            self.Cx = (self.length*math.cos(self.orientation))/2 
-            self.Cy = -(self.length*math.sin(self.orientation))/2
+            self.Ax = abs((self.length*math.cos(self.orientation))/2)  
+            self.Ay = -abs((self.length*math.sin(self.orientation))/2)
+            self.Cx = -abs((self.length*math.cos(self.orientation))/2) 
+            self.Cy = abs((self.length*math.sin(self.orientation))/2)
+        elif (3*math.pi)/2 > self.orientation >= math.pi: 
+            self.Ax = abs((self.length*math.cos(self.orientation))/2)  
+            self.Ay = abs((self.length*math.sin(self.orientation))/2)
+            self.Cx = -abs((self.length*math.cos(self.orientation))/2) 
+            self.Cy = -abs((self.length*math.sin(self.orientation))/2)
+        elif (2* math.pi) > self.orientation >= (3*math.pi)/2: 
+            self.Ax = -abs((self.length*math.cos(self.orientation))/2)  
+            self.Ay = abs((self.length*math.sin(self.orientation))/2)
+            self.Cx = abs((self.length*math.cos(self.orientation))/2) 
+            self.Cy = -abs((self.length*math.sin(self.orientation))/2)
         # Locating coordinates of the endpoint A and C based on centre of mass and delta x and y
         self.pointA = [(self.position[0] + self.Ax), (self.position[1] + self.Ay)]
         self.pointC = [(self.position[0] + self.Cx), (self.position[1]+ self.Cy)]
@@ -106,9 +106,9 @@ def step(initial, angle):
     elif step == 3:
         y -= 1
     elif step == 4:
-        angle += (math.pi/4)
+        angle += (math.pi/180)
     elif step == 5:
-        angle -= (math.pi/4)
+        angle -= (math.pi/180)
     else: #Not really necessary but just to make sure rand is drawn in range
         print('Step error - out of range')
 
@@ -165,13 +165,13 @@ def validate(mover, trial_move, xrange, yrange):
 # Setting up some parameters for simulation cell and steps
 xcoords = list(range(100)) #Length of cell in x direction
 ycoords = list(range(100)) #Length of cell in y direction
-steps = list(range(10000)) #Number of steps in my random walk
+steps = list(range(10)) #Number of steps in my random walk
 
 # INITIALISING PARTICLES
 length = 10
 radius = 2
 edge = radius + (length/2)
-nparticles = 75
+nparticles = 100
 
 for i in range(1,nparticles + 1):
     print('particle no', i)
@@ -183,27 +183,15 @@ for i in range(1,nparticles + 1):
     varname.whereami([startx,starty], start_theta)
     status = overlap(varname)
     while status == True:
-        print('coords not acceptable', startx, starty)
+        #print('coords not acceptable', startx, starty)
         newx = random.randint(min(xcoords) + edge, max(xcoords) - edge)
         newy = random.randint(min(ycoords) + edge, max(ycoords) - edge)
         new_theta = random.uniform(0, 2*math.pi)
         varname.whereami([newx,newy], new_theta)
-        print('new position to try', varname.pointA, varname.pointC)
+        #print('new position to try', varname.pointA, varname.pointC)
         status = overlap(varname)
-        print('new status', status)
 
 
-
-
-
-
-# Initialising a few objects (IN FUTURE I'LL NEED TO AUTOMATE THIS SO WE HAVE MANY PARTICLES)
-#rod1 = RigidRod([88,88], 10, 2, 0)
-#rod1.whereami([88,88], 0)
-#rod2 = RigidRod([30,30], 10, 2, (math.pi/6))
-#rod2.whereami([30,30], (math.pi/6))
-#rod3 = RigidRod([10,10], 10, 2, (math.pi))
-#rod3.whereami([10,10], (math.pi))
 
 ## MAIN FUNCTION ##
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
@@ -222,7 +210,7 @@ for i in steps:
         mover.whereami(initial_position, initial_angle)
         #print('move not allowed, remains at:')
         #print(mover.position)
-    if i%10 == 0:
+    if i%10000 == 0:
         with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'w') as f:
             for j in RigidRod.instances:
                 f.write(str(j.pointA[0]))

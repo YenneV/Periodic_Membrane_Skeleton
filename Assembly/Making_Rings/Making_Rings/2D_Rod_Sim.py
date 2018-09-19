@@ -6,11 +6,11 @@ import numpy as np
 # I'll need to input some variables
 xmax = 100 #Specify the max xcoord of the cell you used
 ymax = 100 #Specify the max ycoord of the cell you used
-steps = list(range(10000)) #Specify the number of steps in the walk so I can read in the right number of files
-nparticles = 75 #Specify how many particles are in the simulation so I know how many lines I need
+steps = list(range(10000000)) #Specify the number of steps in the walk so I can read in the right number of files
+nparticles = 90 #Specify how many particles are in the simulation so I know how many lines I need
 
 for i in steps:
-    if i%250 == 0:
+    if i%10000 == 0:
         with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'r') as p:
             data = np.genfromtxt(p, dtype = float, delimiter = " ")
             plt.axis('square')
