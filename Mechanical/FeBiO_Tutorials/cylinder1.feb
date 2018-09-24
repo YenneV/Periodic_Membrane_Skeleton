@@ -30,21 +30,10 @@
 		</Constants>
 	</Globals>
 	<Material>
-		<material id="1" name="Material2" type="Ogden">
+		<material id="1" name="Material3" type="isotropic elastic">
 			<density>1</density>
-			<k>713</k>
-			<c1>1</c1>
-			<c2>0</c2>
-			<c3>0</c3>
-			<c4>0</c4>
-			<c5>0</c5>
-			<c6>0</c6>
-			<m1>1</m1>
-			<m2>1</m2>
-			<m3>1</m3>
-			<m4>1</m4>
-			<m5>1</m5>
-			<m6>1</m6>
+			<E>2e+009</E>
+			<v>0.3</v>
 		</material>
 	</Material>
 	<Geometry>
@@ -1490,7 +1479,7 @@
 			<node id="1439"> 2.1332079e+001,-4.2432167e+000, 2.0000000e+003</node>
 			<node id="1440"> 2.3538846e+001,-4.6821702e+000, 2.0000000e+003</node>
 		</Nodes>
-		<Elements type="hex8" mat="1" name="Part17">
+		<Elements type="hex8" mat="1" name="Part1">
 			<elem id="1">     1,     2,     7,     6,   161,   162,   167,   166</elem>
 			<elem id="2">     2,     3,     8,     7,   162,   163,   168,   167</elem>
 			<elem id="3">     3,     4,     9,     8,   163,   164,   169,   168</elem>
