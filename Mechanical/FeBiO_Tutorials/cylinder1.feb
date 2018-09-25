@@ -30,10 +30,17 @@
 		</Constants>
 	</Globals>
 	<Material>
-		<material id="1" name="Material3" type="isotropic elastic">
-			<density>1</density>
-			<E>2e+009</E>
-			<v>0.3</v>
+		<material id="1" name="Material4" type="orthotropic elastic">
+			<density>1470</density>
+			<E1>0</E1>
+			<E2>1e+006</E2>
+			<E3>1e+009</E3>
+			<G12>0</G12>
+			<G23>1.4e+006</G23>
+			<G31>0</G31>
+			<v12>0</v12>
+			<v23>0.3</v23>
+			<v31>0</v31>
 		</material>
 	</Material>
 	<Geometry>

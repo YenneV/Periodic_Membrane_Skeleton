@@ -21,6 +21,7 @@ class RigidRod:
         self.position = newcoords
         self.alpha = alpha
         self.beta = beta
+        self.projectedlength = self.length*(math.cos((math.pi/2) - abs(self.alpha)))
         #Setting angles alpha and beta to acceptable range (-pi to +pi)
         if self.alpha > math.pi:
             self.alpha = self.alpha - 2*math.pi
@@ -32,35 +33,35 @@ class RigidRod:
             self.beta = self.beta + 2*math.pi
         #Finding the end points depending on the angles for x and y
         if math.pi/2 > self.beta >= 0:
-            self.Ax = -abs((self.length*math.cos(self.beta))/2)  #This should be the amount that we go back in x by to get left pt
-            self.Ay = -abs((self.length*math.sin(self.beta))/2) #as above for y
-            self.Cx = abs((self.length*math.cos(self.beta))/2)  #amount we go along in x by to get right pt
-            self.Cy = abs((self.length*math.sin(self.beta))/2) #as above for y
+            self.Ax = -abs((self.projectedlength*math.cos(self.beta))/2)  #This should be the amount that we go back in x by to get left pt
+            self.Ay = -abs((self.projectedlength*math.sin(self.beta))/2) #as above for y
+            self.Cx = abs((self.projectedlength*math.cos(self.beta))/2)  #amount we go along in x by to get right pt
+            self.Cy = abs((self.projectedlength*math.sin(self.beta))/2) #as above for y
         elif math.pi >= self.beta >= math.pi/2:
-            self.Ax = abs((self.length*math.cos(self.beta))/2)  
-            self.Ay = -abs((self.length*math.sin(self.beta))/2)
-            self.Cx = -abs((self.length*math.cos(self.beta))/2) 
-            self.Cy = abs((self.length*math.sin(self.beta))/2)
+            self.Ax = abs((self.projectedlength*math.cos(self.beta))/2)  
+            self.Ay = -abs((self.projectedlength*math.sin(self.beta))/2)
+            self.Cx = -abs((self.projectedlength*math.cos(self.beta))/2) 
+            self.Cy = abs((self.projectedlength*math.sin(self.beta))/2)
         elif (-math.pi)/2 > self.beta >= -math.pi: 
-            self.Ax = abs((self.length*math.cos(self.beta))/2)  
-            self.Ay = abs((self.length*math.sin(self.beta))/2)
-            self.Cx = -abs((self.length*math.cos(self.beta))/2) 
-            self.Cy = -abs((self.length*math.sin(self.beta))/2)
+            self.Ax = abs((self.projectedlength*math.cos(self.beta))/2)  
+            self.Ay = abs((self.projectedlength*math.sin(self.beta))/2)
+            self.Cx = -abs((self.projectedlength*math.cos(self.beta))/2) 
+            self.Cy = -abs((self.projectedlength*math.sin(self.beta))/2)
         elif 0 > self.beta >= (-math.pi/2): 
-            self.Ax = -abs((self.length*math.cos(self.beta))/2)  
-            self.Ay = abs((self.length*math.sin(self.beta))/2)
-            self.Cx = abs((self.length*math.cos(self.beta))/2) 
-            self.Cy = -abs((self.length*math.sin(self.beta))/2)
+            self.Ax = -abs((self.projectedlength*math.cos(self.beta))/2)  
+            self.Ay = abs((self.projectedlength*math.sin(self.beta))/2)
+            self.Cx = abs((self.projectedlength*math.cos(self.beta))/2) 
+            self.Cy = -abs((self.projectedlength*math.sin(self.beta))/2)
         #Repeating for z coordinates
         if math.pi/2 > self.alpha >= 0:
             self.Az = -abs((self.length*math.cos(self.alpha))/2)
             self.Cz = abs((self.length*math.cos(self.alpha))/2)
         elif math.pi >= self.alpha >= math.pi/2:
             self.Az = abs((self.length*math.cos(self.alpha))/2)
-            self.Cz = abs((self.length*math.cos(self.alpha))/2)
+            self.Cz = -abs((self.length*math.cos(self.alpha))/2)
         elif (-math.pi)/2 > self.alpha >= - math.pi:
             self.Az = abs((self.length*math.cos(self.alpha))/2)
-            self.Cz = -abs((self.length*math.cos(self.alph))/2)
+            self.Cz = -abs((self.length*math.cos(self.alpha))/2)
         elif 0 > self.alpha >= (-math.pi/2):
             self.Az = -abs((self.length*math.cos(self.alpha))/2)
             self.Cz = abs((self.length*math.cos(self.alpha))/2)
@@ -196,17 +197,18 @@ nparticles = 1
 
 # CREATING TEST PARTICLE
 mytest1 = RigidRod([10,5,2], length, radius, 0, 0)
-mytest1.whereami([10,5,2],0,0)
+mytest1.whereami([10,5,2],(-3*math.pi/4),0)
 print(mytest1.output)
+print(mytest1.projectedlength)
 
 
 # CREATING TEST PLOT
 # NEED TO USE VECTOR RETURNED FROM WALK TO DO A 3D PLOT OF THE POINTS 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-x = [5, 15]
+x = [10, 10]
 y = [5, 5]
-z = [-3, 7]
+z = [7, -3]
 ax.plot(x,y,z)
 plt.show()
 
