@@ -72,12 +72,14 @@ class RigidRod:
     def parametrise(self):
         self.deltax = self.pointC[0] - self.pointA[0] # x component of direction vector from A to C
         self.deltay = self.pointC[1] - self.pointA[1] # y component of direction vector from A to C
+        self.deltaz = self.pointC[2] - self.pointA[2] # z component of direction vector from A to C
         points = list(range(0,self.length + 1))
         linecoords = []
         for t in points:
             xpoint = self.pointA[0] + t*(self.deltax/self.length)
             ypoint = self.pointA[1] + t*(self.deltay/self.length)
-            linecoords.append([xpoint,ypoint])
+            zpoint = self.pointA[2] + t*(self.deltaz/self.length)
+            linecoords.append([xpoint,ypoint,zpoint])
         return linecoords #List of points generated is length + 1 as I need both endpoints
     def neighbourlist(self):
         neighbours = []
@@ -101,7 +103,8 @@ class RigidRod:
             for j in range(0,len(set2)):
                 deltax = abs(set1[i][0] - set2[j][0])
                 deltay = abs(set1[i][1] - set2[j][1])
-                distance = math.sqrt(deltax**2 + deltay**2)
+                deltaz = abs(set1[i][2] - set2[j][2])
+                distance = math.sqrt(deltax**2 + deltay**2 + deltaz**2)
                 if distance < 2*self.radius:
                     overlap = True
                     return overlap #the return statement here should stop everything if condition is true
@@ -197,7 +200,7 @@ nparticles = 1
 
 # CREATING TEST PARTICLE
 mytest1 = RigidRod([10,5,2], length, radius, 0, 0)
-mytest1.whereami([10,5,2],(-3*math.pi/4),0)
+mytest1.whereami([10,5,2],-3*math.pi/4, -math.pi/4)
 print(mytest1.output)
 print(mytest1.projectedlength)
 
@@ -206,9 +209,9 @@ print(mytest1.projectedlength)
 # NEED TO USE VECTOR RETURNED FROM WALK TO DO A 3D PLOT OF THE POINTS 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-x = [10, 10]
-y = [5, 5]
-z = [7, -3]
+x = [7.5, 12.5]
+y = [7.5, 2.5]
+z = [5.34, -1.54]
 ax.plot(x,y,z)
 plt.show()
 
