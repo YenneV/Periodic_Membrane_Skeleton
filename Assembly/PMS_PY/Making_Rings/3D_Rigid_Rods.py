@@ -7,7 +7,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import random
 random.seed(10)
 
-# Creating Class for rod-like objects
+# Creating Class for 3 dimensional, rigid rod-like objects
 class RigidRod:
     instances = []
     def __init__(self, position, length, radius, alpha, beta):
@@ -116,12 +116,13 @@ class RigidRod:
 
 ## FUNCTION DEFINITIONS ##
 
-# 'step' function generates a trial move, based on an initial position
-def step(initial, angle):
+# 'step' function generates a trial move of either a displacement or orientational change in 3D space
+def step(initial, alpha, beta):
     x = initial[0]
     y = initial[1]
+    z = initial[2]
 
-    step = random.randint(0,5)
+    step = random.randint(0,9)
     if step == 0:
         x += 1
     elif step == 1:
@@ -131,14 +132,23 @@ def step(initial, angle):
     elif step == 3:
         y -= 1
     elif step == 4:
-        angle += (math.pi/180)
+        z += 1
     elif step == 5:
-        angle -= (math.pi/180)
+        z -= 1
+    elif step == 6:
+        alpha += (math.pi/180)
+    elif step == 7:
+        alpha -= (math.pi/180)
+    elif step == 8:
+        beta += (math.pi/180)
+    elif step == 9:
+        beta -= (math.pi/180)
     else: #Not really necessary but just to make sure rand is drawn in range
         print('Step error - out of range')
 
-    trial = [x,y,angle]
+    trial = [x,y,z,alpha,beta]
     return trial
+
 
 # 'overlap' function takes a particle and uses neighbourlist and neighbourdist methods to figure out 
 # if this particle is too close to any other particle - [should only be called during validate as the 
@@ -154,27 +164,63 @@ def overlap(mover):
             continue
     return result
 
-# Function takes a particle, a trial move and the cell limits, and returns true if 
-# the move is accepted and false if it is not
-def validate(mover, trial_move, xrange, yrange):
-    #find the valid range of x values for any move, and same for y, and return as list
-    validx = list(range((min(xrange) + mover.radius), (max(xrange) - mover.radius))) 
-    validy = list(range((min(yrange) + mover.radius), (max(yrange) - mover.radius)))
-    mover.whereami(trial_move[0:2], trial_move[2]) #Runs function on trial move to update coords of A,B,C points
-    #moverID = (Particle.instances.index(mover)) #Gives me the index in the class instance list for the moving particle
+# 'transform' function takes a vector of x,y,z Cartesian coordinates and returns a vector of cylindrical coords
+def transform(cart_coords):
+    x = cart_coords[0]
+    y = cart_coords[1]
+    z = cart_coords[2]
+
+    r = math.sqrt(x**2 + y**2)
+    theta = math.atan(y/x)
+    z = z
+
+    cyl_coords = [r,theta,z]
+    return cyl_coords
+
+
+# 'validate' function tests to see whether a particle remains within the cell for a given trial move
+def validate(mover, trial_move, radius, length):
+    # These are the minimum and maximum endpoint positions allowed in r and z
+    minr = -radius + mover.radius
+    maxr = radius - mover.radius
+    minz = 0 + mover.radius
+    maxz = length - mover.radius
+    # Particle position and orientation updated with trial move coordinates (Cartesian)
+    mover.whereami(trial_move[0:3], trial_move[3], trial_move[4])
+    # Cartesian coordinates need transforming to cylindrical
+    # ACTUALLY I NEED TO DO THIS WITH THE ENDPOINTS, NOT THE CENTREPOINT!
+    cylcoordsA = transform(mover.pointA[0:3])
+    cylcoordsC = transform(mover.pointC[0:3])
+    rA = cylcoordsA[0]
+    zA = cylcoordsA[2]
+    rC = cylcoordsC[0]
+    zC= cylcoordsC[2]
+    # if else statements to check if move allowed
     accept = False
-    if (int(mover.pointA[0])) not in validx:
+    if rA < minr:
         accept = False
-        print('A point out of bounds in x')
-    elif (int(mover.pointC[0])) not in validx:
+        print('A point out of bounds in r')
+    elif rA > maxr:
         accept = False
-        print('C point out of bounds in x')
-    elif (int(mover.pointA[1])) not in validy:
+        print('A point out of bounds in r')
+    elif rC < minr:
         accept = False
-        print('A point out of bounds in y')
-    elif (int(mover.pointC[1])) not in validy:
+        print('C point out of bounds in r')
+    elif rC > maxr:
         accept = False
-        print('C point out of bounds in y')
+        print('C point out of bounds in r')
+    elif zA < minz:
+        accept = False
+        print('A point out of bounds in z')
+    elif zA > maxz:
+        accept = False
+        print('A point out of bounds in z')
+    elif zC < minz:
+        accept = False
+        print('C point out of bounds in z')
+    elif zC > maxz:
+        accept = False
+        print('C point out of bounds in z')
     elif overlap(mover) == True:
         accept = False
         print('trial move would overlap another particle')
@@ -188,50 +234,53 @@ def validate(mover, trial_move, xrange, yrange):
 
 # SETTING UP INITIAL VALUES
 # Setting up some parameters for simulation cell and steps
-xcoords = list(range(100)) #Length of cell in x direction
-ycoords = list(range(100)) #Length of cell in y direction
+cellradius = 50 #radius of axon, r coordinate
+celllength = 100 #length of axon, z coordinate
 steps = list(range(10)) #Number of steps in my random walk
 
-# INITIALISING PARTICLES
+## INITIALISING PARTICLES
 length = 10
 radius = 2
-edge = radius + (length/2)
-nparticles = 1
-
-# CREATING TEST PARTICLE
-mytest1 = RigidRod([10,5,2], length, radius, 0, 0)
-mytest1.whereami([10,5,2],-3*math.pi/4, -math.pi/4)
-print(mytest1.output)
-print(mytest1.projectedlength)
+nparticles = 25 #number of rod particles
+edge = radius + (length/2) #the amount of space we need to leave between centrepoint and edges
 
 
-# CREATING TEST PLOT
-# NEED TO USE VECTOR RETURNED FROM WALK TO DO A 3D PLOT OF THE POINTS 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-x = [7.5, 12.5]
-y = [7.5, 2.5]
-z = [5.34, -1.54]
-ax.plot(x,y,z)
-plt.show()
+## CREATING PARTICLES
+for i in range(1,nparticles + 1):
+    print('particle no', i)
+    #maybe start in cylindrical coords, choose r, z and theta in range for position, then alpha and beta
+    #for orientation, with all the necessary restrictions, then switch the r,z,theta to x,y,z and continue
+    startr = random.uniform(-cellradius + edge, cellradius - edge)
+    print('r coordinate', startr)
+    starttheta = random.uniform(0, 2*math.pi)
+    print('theta', starttheta)
+    startz = random.uniform(0 + edge, celllength - edge)
+    print('z coordinate', startz)
+    start_cart = transform([startr,starttheta,startz])
+    startalpha = random.uniform(-math.pi, math.pi)
+    print('alpha', startalpha)
+    startbeta = random.uniform(-math.pi, math.pi)
+    print('beta', startbeta)
+    varname = 'rod{}'.format(i)
+    varname = RigidRod(start_cart, length, radius, startalpha, startbeta)
+    varname.whereami(start_cart, startalpha, startbeta)
+    status = overlap(varname)
+    while status == True:
+        #print('coordinates not within range')
+        newr = random.uniform(-cellradius + edge, cellradius - edge)
+        newtheta = random.uniform(0, 2*math.pi)
+        newz = random.uniform(0 + edge, celllength - edge)
+        new_cart = transform([newr,newtheta,newz])
+        newalpha = random.uniform(-math.pi, math.pi)
+        newbeta = random.uniform(-math.pi, math.pi)
+        varname.whereami(new_cart, newalpha, newbeta)
+        #print('new position to try', varname.pointA, varname.pointC)
+        status = overlap(varname)
+        print('status is', status)
 
-#for i in range(1,nparticles + 1):
-#    print('particle no', i)
-#    startx = random.randint(min(xcoords) + edge, max(xcoords) - edge)
-#    starty = random.randint(min(ycoords) + edge, max(ycoords) - edge)
-#    start_theta = random.uniform(0, 2*math.pi)
-#    varname = 'rod{}'.format(i)
-#    varname = RigidRod([startx,starty], length, radius, start_theta)
-#    varname.whereami([startx,starty], start_theta)
-#    status = overlap(varname)
-#    while status == True:
-#        #print('coords not acceptable', startx, starty)
-#        newx = random.randint(min(xcoords) + edge, max(xcoords) - edge)
-#        newy = random.randint(min(ycoords) + edge, max(ycoords) - edge)
-#        new_theta = random.uniform(0, 2*math.pi)
-#        varname.whereami([newx,newy], new_theta)
-#        #print('new position to try', varname.pointA, varname.pointC)
-#        status = overlap(varname)
+
+
+
 
 
 
@@ -264,3 +313,12 @@ plt.show()
 #                f.write(str(j.pointC[1]))
 #                f.write('\n')
     
+# CREATING TEST PLOT
+# NEED TO USE VECTOR RETURNED FROM WALK TO DO A 3D PLOT OF THE POINTS 
+#fig = plt.figure()
+#ax = fig.add_subplot(111, projection='3d')
+#x = [7.5, 12.5]
+#y = [7.5, 2.5]
+#z = [5.34, -1.54]
+#ax.plot(x,y,z)
+#plt.show()
