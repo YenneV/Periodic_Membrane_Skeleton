@@ -164,8 +164,8 @@ def overlap(mover):
             continue
     return result
 
-# 'transform' function takes a vector of x,y,z Cartesian coordinates and returns a vector of cylindrical coords
-def transform(cart_coords):
+# 'transformcarcyl' function takes a vector of x,y,z Cartesian coordinates and returns a vector of cylindrical coords
+def transform_carcyl(cart_coords):
     x = cart_coords[0]
     y = cart_coords[1]
     z = cart_coords[2]
@@ -178,10 +178,24 @@ def transform(cart_coords):
     return cyl_coords
 
 
+# 'transformcylcar' function takes a vector of r, theta, z cylindrical coordinates and returns a vector of cartesian coords
+def transform_cylcar(cyl_coords):
+    r = cyl_coords[0]
+    theta = cyl_coords[1]
+    z = cyl_coords[2]
+
+    x = r*math.cos(theta)
+    y = r*math.sin(theta)
+    z = z
+
+    cart_coords = [x,y,z]
+    return cart_coords
+
+
 # 'validate' function tests to see whether a particle remains within the cell for a given trial move
 def validate(mover, trial_move, radius, length):
     # These are the minimum and maximum endpoint positions allowed in r and z
-    minr = -radius + mover.radius
+    minr = 0 + mover.radius
     maxr = radius - mover.radius
     minz = 0 + mover.radius
     maxz = length - mover.radius
@@ -189,8 +203,8 @@ def validate(mover, trial_move, radius, length):
     mover.whereami(trial_move[0:3], trial_move[3], trial_move[4])
     # Cartesian coordinates need transforming to cylindrical
     # ACTUALLY I NEED TO DO THIS WITH THE ENDPOINTS, NOT THE CENTREPOINT!
-    cylcoordsA = transform(mover.pointA[0:3])
-    cylcoordsC = transform(mover.pointC[0:3])
+    cylcoordsA = transform_carcyl(mover.pointA[0:3])
+    cylcoordsC = transform_carcyl(mover.pointC[0:3])
     rA = cylcoordsA[0]
     zA = cylcoordsA[2]
     rC = cylcoordsC[0]
@@ -199,28 +213,28 @@ def validate(mover, trial_move, radius, length):
     accept = False
     if rA < minr:
         accept = False
-        print('A point out of bounds in r')
+        print('A point out of bounds in r - less than min')
     elif rA > maxr:
         accept = False
-        print('A point out of bounds in r')
+        print('A point out of bounds in r - more than max')
     elif rC < minr:
         accept = False
-        print('C point out of bounds in r')
+        print('C point out of bounds in r - less than min')
     elif rC > maxr:
         accept = False
-        print('C point out of bounds in r')
+        print('C point out of bounds in r - more than max')
     elif zA < minz:
         accept = False
-        print('A point out of bounds in z')
+        print('A point out of bounds in z - less than min')
     elif zA > maxz:
         accept = False
-        print('A point out of bounds in z')
+        print('A point out of bounds in z - more than max')
     elif zC < minz:
         accept = False
-        print('C point out of bounds in z')
+        print('C point out of bounds in z - less than min')
     elif zC > maxz:
         accept = False
-        print('C point out of bounds in z')
+        print('C point out of bounds in z - more than max')
     elif overlap(mover) == True:
         accept = False
         print('trial move would overlap another particle')
@@ -236,41 +250,41 @@ def validate(mover, trial_move, radius, length):
 # Setting up some parameters for simulation cell and steps
 cellradius = 50 #radius of axon, r coordinate
 celllength = 100 #length of axon, z coordinate
-steps = list(range(10)) #Number of steps in my random walk
+steps = list(range(10000)) #Number of steps in my random walk
 
 ## INITIALISING PARTICLES
-length = 10
+length = 5
 radius = 2
-nparticles = 25 #number of rod particles
+nparticles = 500 #number of rod particles
 edge = radius + (length/2) #the amount of space we need to leave between centrepoint and edges
 
 
 ## CREATING PARTICLES
 for i in range(1,nparticles + 1):
     print('particle no', i)
-    #maybe start in cylindrical coords, choose r, z and theta in range for position, then alpha and beta
-    #for orientation, with all the necessary restrictions, then switch the r,z,theta to x,y,z and continue
-    startr = random.uniform(-cellradius + edge, cellradius - edge)
-    print('r coordinate', startr)
+    #choosing some random cylindrical coordinates
+    startr = random.uniform(0 + edge, cellradius - edge)
     starttheta = random.uniform(0, 2*math.pi)
-    print('theta', starttheta)
     startz = random.uniform(0 + edge, celllength - edge)
-    print('z coordinate', startz)
-    start_cart = transform([startr,starttheta,startz])
+    start_cyl = [startr,starttheta,startz]
+    print('starting cylindrical coords are', start_cyl)
+    #converting to cartesian
+    start_cart = transform_cylcar([startr,starttheta,startz]) #doesn't transform take cart adn return cyl
+    print('starting Cartesian coords are', start_cart)
+    #alpha and beta determine the orientation of the rod
     startalpha = random.uniform(-math.pi, math.pi)
-    print('alpha', startalpha)
     startbeta = random.uniform(-math.pi, math.pi)
-    print('beta', startbeta)
+    #creating a rod with these coords
     varname = 'rod{}'.format(i)
     varname = RigidRod(start_cart, length, radius, startalpha, startbeta)
     varname.whereami(start_cart, startalpha, startbeta)
     status = overlap(varname)
     while status == True:
         #print('coordinates not within range')
-        newr = random.uniform(-cellradius + edge, cellradius - edge)
+        newr = random.uniform(0 + edge, cellradius - edge)
         newtheta = random.uniform(0, 2*math.pi)
         newz = random.uniform(0 + edge, celllength - edge)
-        new_cart = transform([newr,newtheta,newz])
+        new_cart = transform_cylcar([newr,newtheta,newz])
         newalpha = random.uniform(-math.pi, math.pi)
         newbeta = random.uniform(-math.pi, math.pi)
         varname.whereami(new_cart, newalpha, newbeta)
@@ -280,45 +294,39 @@ for i in range(1,nparticles + 1):
 
 
 
-
-
-
-
 ## MAIN FUNCTION ##
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
 # to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
-#for i in steps:
-#    print(i)
-#    mover = (random.choice(RigidRod.instances)) #Selects a particle to move
-#    initial_position = mover.position
-#    initial_angle = mover.orientation
-#    trial_move = step(initial_position, initial_angle) #Returns list of [x,y,orientation]
-#    accept = validate(mover, trial_move, xcoords, ycoords) # function to return a yes or no
-#    if accept == True:
-#        mover.whereami(trial_move[0:2], trial_move[2])
-#        #print('move allowed')
-#    else:
-#        mover.whereami(initial_position, initial_angle)
-#        #print('move not allowed, remains at:')
-#        #print(mover.position)
-#    if i%10000 == 0:
-#        with open('D:\Code\Assembly\Making_Rings\Making_Rings\Results\Rigid_Rods\coords{}.txt'.format(i), 'w') as f:
-#            for j in RigidRod.instances:
-#                f.write(str(j.pointA[0]))
-#                f.write(" ")
-#                f.write(str(j.pointA[1]))
-#                f.write(" ")
-#                f.write(str(j.pointC[0]))
-#                f.write(" ")
-#                f.write(str(j.pointC[1]))
-#                f.write('\n')
+for i in steps:
+    print(i)
+    mover = (random.choice(RigidRod.instances)) #Selects a particle to move
+    initial_position = mover.position
+    #print('initial position is', initial_position)
+    initial_alpha = mover.alpha
+    initial_beta = mover.beta
+    trial_move = step(initial_position, initial_alpha, initial_beta) #Returns list of [x,y,z,alpha,beta]
+    #print('trial position is', trial_move)
+    accept = validate(mover, trial_move, cellradius, celllength) # function to return a yes or no
+    if accept == True:
+        mover.whereami(trial_move[0:3], trial_move[3], trial_move[4])
+        print('move allowed')
+    else:
+        mover.whereami(initial_position, initial_alpha, initial_beta)
+        #print('move not allowed, remains at:')
+        #print(mover.position)
+    if i%1000 == 0:
+        with open('D:\Code\Assembly\PMS_PY\Making_Rings\Results\Rigid_Rods_3D\Testing\coords{}.txt.'.format(i), 'w') as f:
+            for j in RigidRod.instances:
+                f.write(str(j.pointA[0]))
+                f.write(" ")
+                f.write(str(j.pointA[1]))
+                f.write(" ")
+                f.write(str(j.pointA[2]))
+                f.write(" ")
+                f.write(str(j.pointC[0]))
+                f.write(" ")
+                f.write(str(j.pointC[1]))
+                f.write(" ")
+                f.write(str(j.pointC[2]))
+                f.write('\n')
     
-# CREATING TEST PLOT
-# NEED TO USE VECTOR RETURNED FROM WALK TO DO A 3D PLOT OF THE POINTS 
-#fig = plt.figure()
-#ax = fig.add_subplot(111, projection='3d')
-#x = [7.5, 12.5]
-#y = [7.5, 2.5]
-#z = [5.34, -1.54]
-#ax.plot(x,y,z)
-#plt.show()

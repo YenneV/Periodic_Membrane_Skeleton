@@ -30,6 +30,9 @@
     <Compile Include="3D_Rigid_Rods.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="3D_Rod_Sim.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Particle.py">
       <SubType>Code</SubType>
     </Compile>
