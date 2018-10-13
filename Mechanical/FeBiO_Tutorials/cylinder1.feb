@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <febio_spec version="2.5">
 	<Module type="solid"/>
-	<Control>
-		<time_steps>10</time_steps>
-		<step_size>0.1</step_size>
-		<max_refs>15</max_refs>
-		<max_ups>10</max_ups>
-		<diverge_reform>1</diverge_reform>
-		<reform_each_time_step>1</reform_each_time_step>
-		<dtol>0.001</dtol>
-		<etol>0.01</etol>
-		<rtol>0</rtol>
-		<lstol>0.9</lstol>
-		<min_residual>1e-020</min_residual>
-		<qnmethod>0</qnmethod>
-		<time_stepper>
-			<dtmin>0.01</dtmin>
-			<dtmax>0.1</dtmax>
-			<max_retries>5</max_retries>
-			<opt_iter>10</opt_iter>
-		</time_stepper>
-		<analysis type="static"/>
-	</Control>
 	<Globals>
 		<Constants>
 			<T>0</T>
@@ -32,15 +11,15 @@
 	<Material>
 		<material id="1" name="Material4" type="orthotropic elastic">
 			<density>1470</density>
-			<E1>0</E1>
-			<E2>1e+006</E2>
+			<E1>1e+009</E1>
+			<E2>4e+006</E2>
 			<E3>1e+009</E3>
-			<G12>0</G12>
-			<G23>1.4e+006</G23>
-			<G31>0</G31>
-			<v12>0</v12>
-			<v23>0.3</v23>
-			<v31>0</v31>
+			<G12>3.3e+008</G12>
+			<G23>100000</G23>
+			<G31>5e+006</G31>
+			<v12>0.5</v12>
+			<v23>0.0012</v23>
+			<v31>-0.99</v31>
 		</material>
 	</Material>
 	<Geometry>
@@ -3154,648 +3133,6 @@
 			<node id="159"/>
 			<node id="160"/>
 		</NodeSet>
-		<NodeSet name="PrescribedDisplacement1">
-			<node id="1281"/>
-			<node id="1282"/>
-			<node id="1283"/>
-			<node id="1284"/>
-			<node id="1285"/>
-			<node id="1286"/>
-			<node id="1287"/>
-			<node id="1288"/>
-			<node id="1289"/>
-			<node id="1290"/>
-			<node id="1291"/>
-			<node id="1292"/>
-			<node id="1293"/>
-			<node id="1294"/>
-			<node id="1295"/>
-			<node id="1296"/>
-			<node id="1297"/>
-			<node id="1298"/>
-			<node id="1299"/>
-			<node id="1300"/>
-			<node id="1301"/>
-			<node id="1302"/>
-			<node id="1303"/>
-			<node id="1304"/>
-			<node id="1305"/>
-			<node id="1306"/>
-			<node id="1307"/>
-			<node id="1308"/>
-			<node id="1309"/>
-			<node id="1310"/>
-			<node id="1311"/>
-			<node id="1312"/>
-			<node id="1313"/>
-			<node id="1314"/>
-			<node id="1315"/>
-			<node id="1316"/>
-			<node id="1317"/>
-			<node id="1318"/>
-			<node id="1319"/>
-			<node id="1320"/>
-			<node id="1321"/>
-			<node id="1322"/>
-			<node id="1323"/>
-			<node id="1324"/>
-			<node id="1325"/>
-			<node id="1326"/>
-			<node id="1327"/>
-			<node id="1328"/>
-			<node id="1329"/>
-			<node id="1330"/>
-			<node id="1331"/>
-			<node id="1332"/>
-			<node id="1333"/>
-			<node id="1334"/>
-			<node id="1335"/>
-			<node id="1336"/>
-			<node id="1337"/>
-			<node id="1338"/>
-			<node id="1339"/>
-			<node id="1340"/>
-			<node id="1341"/>
-			<node id="1342"/>
-			<node id="1343"/>
-			<node id="1344"/>
-			<node id="1345"/>
-			<node id="1346"/>
-			<node id="1347"/>
-			<node id="1348"/>
-			<node id="1349"/>
-			<node id="1350"/>
-			<node id="1351"/>
-			<node id="1352"/>
-			<node id="1353"/>
-			<node id="1354"/>
-			<node id="1355"/>
-			<node id="1356"/>
-			<node id="1357"/>
-			<node id="1358"/>
-			<node id="1359"/>
-			<node id="1360"/>
-			<node id="1361"/>
-			<node id="1362"/>
-			<node id="1363"/>
-			<node id="1364"/>
-			<node id="1365"/>
-			<node id="1366"/>
-			<node id="1367"/>
-			<node id="1368"/>
-			<node id="1369"/>
-			<node id="1370"/>
-			<node id="1371"/>
-			<node id="1372"/>
-			<node id="1373"/>
-			<node id="1374"/>
-			<node id="1375"/>
-			<node id="1376"/>
-			<node id="1377"/>
-			<node id="1378"/>
-			<node id="1379"/>
-			<node id="1380"/>
-			<node id="1381"/>
-			<node id="1382"/>
-			<node id="1383"/>
-			<node id="1384"/>
-			<node id="1385"/>
-			<node id="1386"/>
-			<node id="1387"/>
-			<node id="1388"/>
-			<node id="1389"/>
-			<node id="1390"/>
-			<node id="1391"/>
-			<node id="1392"/>
-			<node id="1393"/>
-			<node id="1394"/>
-			<node id="1395"/>
-			<node id="1396"/>
-			<node id="1397"/>
-			<node id="1398"/>
-			<node id="1399"/>
-			<node id="1400"/>
-			<node id="1401"/>
-			<node id="1402"/>
-			<node id="1403"/>
-			<node id="1404"/>
-			<node id="1405"/>
-			<node id="1406"/>
-			<node id="1407"/>
-			<node id="1408"/>
-			<node id="1409"/>
-			<node id="1410"/>
-			<node id="1411"/>
-			<node id="1412"/>
-			<node id="1413"/>
-			<node id="1414"/>
-			<node id="1415"/>
-			<node id="1416"/>
-			<node id="1417"/>
-			<node id="1418"/>
-			<node id="1419"/>
-			<node id="1420"/>
-			<node id="1421"/>
-			<node id="1422"/>
-			<node id="1423"/>
-			<node id="1424"/>
-			<node id="1425"/>
-			<node id="1426"/>
-			<node id="1427"/>
-			<node id="1428"/>
-			<node id="1429"/>
-			<node id="1430"/>
-			<node id="1431"/>
-			<node id="1432"/>
-			<node id="1433"/>
-			<node id="1434"/>
-			<node id="1435"/>
-			<node id="1436"/>
-			<node id="1437"/>
-			<node id="1438"/>
-			<node id="1439"/>
-			<node id="1440"/>
-			<node id="1281"/>
-			<node id="1282"/>
-			<node id="1283"/>
-			<node id="1284"/>
-			<node id="1285"/>
-			<node id="1286"/>
-			<node id="1287"/>
-			<node id="1288"/>
-			<node id="1289"/>
-			<node id="1290"/>
-			<node id="1291"/>
-			<node id="1292"/>
-			<node id="1293"/>
-			<node id="1294"/>
-			<node id="1295"/>
-			<node id="1296"/>
-			<node id="1297"/>
-			<node id="1298"/>
-			<node id="1299"/>
-			<node id="1300"/>
-			<node id="1301"/>
-			<node id="1302"/>
-			<node id="1303"/>
-			<node id="1304"/>
-			<node id="1305"/>
-			<node id="1306"/>
-			<node id="1307"/>
-			<node id="1308"/>
-			<node id="1309"/>
-			<node id="1310"/>
-			<node id="1311"/>
-			<node id="1312"/>
-			<node id="1313"/>
-			<node id="1314"/>
-			<node id="1315"/>
-			<node id="1316"/>
-			<node id="1317"/>
-			<node id="1318"/>
-			<node id="1319"/>
-			<node id="1320"/>
-			<node id="1321"/>
-			<node id="1322"/>
-			<node id="1323"/>
-			<node id="1324"/>
-			<node id="1325"/>
-			<node id="1326"/>
-			<node id="1327"/>
-			<node id="1328"/>
-			<node id="1329"/>
-			<node id="1330"/>
-			<node id="1331"/>
-			<node id="1332"/>
-			<node id="1333"/>
-			<node id="1334"/>
-			<node id="1335"/>
-			<node id="1336"/>
-			<node id="1337"/>
-			<node id="1338"/>
-			<node id="1339"/>
-			<node id="1340"/>
-			<node id="1341"/>
-			<node id="1342"/>
-			<node id="1343"/>
-			<node id="1344"/>
-			<node id="1345"/>
-			<node id="1346"/>
-			<node id="1347"/>
-			<node id="1348"/>
-			<node id="1349"/>
-			<node id="1350"/>
-			<node id="1351"/>
-			<node id="1352"/>
-			<node id="1353"/>
-			<node id="1354"/>
-			<node id="1355"/>
-			<node id="1356"/>
-			<node id="1357"/>
-			<node id="1358"/>
-			<node id="1359"/>
-			<node id="1360"/>
-			<node id="1361"/>
-			<node id="1362"/>
-			<node id="1363"/>
-			<node id="1364"/>
-			<node id="1365"/>
-			<node id="1366"/>
-			<node id="1367"/>
-			<node id="1368"/>
-			<node id="1369"/>
-			<node id="1370"/>
-			<node id="1371"/>
-			<node id="1372"/>
-			<node id="1373"/>
-			<node id="1374"/>
-			<node id="1375"/>
-			<node id="1376"/>
-			<node id="1377"/>
-			<node id="1378"/>
-			<node id="1379"/>
-			<node id="1380"/>
-			<node id="1381"/>
-			<node id="1382"/>
-			<node id="1383"/>
-			<node id="1384"/>
-			<node id="1385"/>
-			<node id="1386"/>
-			<node id="1387"/>
-			<node id="1388"/>
-			<node id="1389"/>
-			<node id="1390"/>
-			<node id="1391"/>
-			<node id="1392"/>
-			<node id="1393"/>
-			<node id="1394"/>
-			<node id="1395"/>
-			<node id="1396"/>
-			<node id="1397"/>
-			<node id="1398"/>
-			<node id="1399"/>
-			<node id="1400"/>
-			<node id="1401"/>
-			<node id="1402"/>
-			<node id="1403"/>
-			<node id="1404"/>
-			<node id="1405"/>
-			<node id="1406"/>
-			<node id="1407"/>
-			<node id="1408"/>
-			<node id="1409"/>
-			<node id="1410"/>
-			<node id="1411"/>
-			<node id="1412"/>
-			<node id="1413"/>
-			<node id="1414"/>
-			<node id="1415"/>
-			<node id="1416"/>
-			<node id="1417"/>
-			<node id="1418"/>
-			<node id="1419"/>
-			<node id="1420"/>
-			<node id="1421"/>
-			<node id="1422"/>
-			<node id="1423"/>
-			<node id="1424"/>
-			<node id="1425"/>
-			<node id="1426"/>
-			<node id="1427"/>
-			<node id="1428"/>
-			<node id="1429"/>
-			<node id="1430"/>
-			<node id="1431"/>
-			<node id="1432"/>
-			<node id="1433"/>
-			<node id="1434"/>
-			<node id="1435"/>
-			<node id="1436"/>
-			<node id="1437"/>
-			<node id="1438"/>
-			<node id="1439"/>
-			<node id="1440"/>
-			<node id="1281"/>
-			<node id="1282"/>
-			<node id="1283"/>
-			<node id="1284"/>
-			<node id="1285"/>
-			<node id="1286"/>
-			<node id="1287"/>
-			<node id="1288"/>
-			<node id="1289"/>
-			<node id="1290"/>
-			<node id="1291"/>
-			<node id="1292"/>
-			<node id="1293"/>
-			<node id="1294"/>
-			<node id="1295"/>
-			<node id="1296"/>
-			<node id="1297"/>
-			<node id="1298"/>
-			<node id="1299"/>
-			<node id="1300"/>
-			<node id="1301"/>
-			<node id="1302"/>
-			<node id="1303"/>
-			<node id="1304"/>
-			<node id="1305"/>
-			<node id="1306"/>
-			<node id="1307"/>
-			<node id="1308"/>
-			<node id="1309"/>
-			<node id="1310"/>
-			<node id="1311"/>
-			<node id="1312"/>
-			<node id="1313"/>
-			<node id="1314"/>
-			<node id="1315"/>
-			<node id="1316"/>
-			<node id="1317"/>
-			<node id="1318"/>
-			<node id="1319"/>
-			<node id="1320"/>
-			<node id="1321"/>
-			<node id="1322"/>
-			<node id="1323"/>
-			<node id="1324"/>
-			<node id="1325"/>
-			<node id="1326"/>
-			<node id="1327"/>
-			<node id="1328"/>
-			<node id="1329"/>
-			<node id="1330"/>
-			<node id="1331"/>
-			<node id="1332"/>
-			<node id="1333"/>
-			<node id="1334"/>
-			<node id="1335"/>
-			<node id="1336"/>
-			<node id="1337"/>
-			<node id="1338"/>
-			<node id="1339"/>
-			<node id="1340"/>
-			<node id="1341"/>
-			<node id="1342"/>
-			<node id="1343"/>
-			<node id="1344"/>
-			<node id="1345"/>
-			<node id="1346"/>
-			<node id="1347"/>
-			<node id="1348"/>
-			<node id="1349"/>
-			<node id="1350"/>
-			<node id="1351"/>
-			<node id="1352"/>
-			<node id="1353"/>
-			<node id="1354"/>
-			<node id="1355"/>
-			<node id="1356"/>
-			<node id="1357"/>
-			<node id="1358"/>
-			<node id="1359"/>
-			<node id="1360"/>
-			<node id="1361"/>
-			<node id="1362"/>
-			<node id="1363"/>
-			<node id="1364"/>
-			<node id="1365"/>
-			<node id="1366"/>
-			<node id="1367"/>
-			<node id="1368"/>
-			<node id="1369"/>
-			<node id="1370"/>
-			<node id="1371"/>
-			<node id="1372"/>
-			<node id="1373"/>
-			<node id="1374"/>
-			<node id="1375"/>
-			<node id="1376"/>
-			<node id="1377"/>
-			<node id="1378"/>
-			<node id="1379"/>
-			<node id="1380"/>
-			<node id="1381"/>
-			<node id="1382"/>
-			<node id="1383"/>
-			<node id="1384"/>
-			<node id="1385"/>
-			<node id="1386"/>
-			<node id="1387"/>
-			<node id="1388"/>
-			<node id="1389"/>
-			<node id="1390"/>
-			<node id="1391"/>
-			<node id="1392"/>
-			<node id="1393"/>
-			<node id="1394"/>
-			<node id="1395"/>
-			<node id="1396"/>
-			<node id="1397"/>
-			<node id="1398"/>
-			<node id="1399"/>
-			<node id="1400"/>
-			<node id="1401"/>
-			<node id="1402"/>
-			<node id="1403"/>
-			<node id="1404"/>
-			<node id="1405"/>
-			<node id="1406"/>
-			<node id="1407"/>
-			<node id="1408"/>
-			<node id="1409"/>
-			<node id="1410"/>
-			<node id="1411"/>
-			<node id="1412"/>
-			<node id="1413"/>
-			<node id="1414"/>
-			<node id="1415"/>
-			<node id="1416"/>
-			<node id="1417"/>
-			<node id="1418"/>
-			<node id="1419"/>
-			<node id="1420"/>
-			<node id="1421"/>
-			<node id="1422"/>
-			<node id="1423"/>
-			<node id="1424"/>
-			<node id="1425"/>
-			<node id="1426"/>
-			<node id="1427"/>
-			<node id="1428"/>
-			<node id="1429"/>
-			<node id="1430"/>
-			<node id="1431"/>
-			<node id="1432"/>
-			<node id="1433"/>
-			<node id="1434"/>
-			<node id="1435"/>
-			<node id="1436"/>
-			<node id="1437"/>
-			<node id="1438"/>
-			<node id="1439"/>
-			<node id="1440"/>
-			<node id="1281"/>
-			<node id="1282"/>
-			<node id="1283"/>
-			<node id="1284"/>
-			<node id="1285"/>
-			<node id="1286"/>
-			<node id="1287"/>
-			<node id="1288"/>
-			<node id="1289"/>
-			<node id="1290"/>
-			<node id="1291"/>
-			<node id="1292"/>
-			<node id="1293"/>
-			<node id="1294"/>
-			<node id="1295"/>
-			<node id="1296"/>
-			<node id="1297"/>
-			<node id="1298"/>
-			<node id="1299"/>
-			<node id="1300"/>
-			<node id="1301"/>
-			<node id="1302"/>
-			<node id="1303"/>
-			<node id="1304"/>
-			<node id="1305"/>
-			<node id="1306"/>
-			<node id="1307"/>
-			<node id="1308"/>
-			<node id="1309"/>
-			<node id="1310"/>
-			<node id="1311"/>
-			<node id="1312"/>
-			<node id="1313"/>
-			<node id="1314"/>
-			<node id="1315"/>
-			<node id="1316"/>
-			<node id="1317"/>
-			<node id="1318"/>
-			<node id="1319"/>
-			<node id="1320"/>
-			<node id="1321"/>
-			<node id="1322"/>
-			<node id="1323"/>
-			<node id="1324"/>
-			<node id="1325"/>
-			<node id="1326"/>
-			<node id="1327"/>
-			<node id="1328"/>
-			<node id="1329"/>
-			<node id="1330"/>
-			<node id="1331"/>
-			<node id="1332"/>
-			<node id="1333"/>
-			<node id="1334"/>
-			<node id="1335"/>
-			<node id="1336"/>
-			<node id="1337"/>
-			<node id="1338"/>
-			<node id="1339"/>
-			<node id="1340"/>
-			<node id="1341"/>
-			<node id="1342"/>
-			<node id="1343"/>
-			<node id="1344"/>
-			<node id="1345"/>
-			<node id="1346"/>
-			<node id="1347"/>
-			<node id="1348"/>
-			<node id="1349"/>
-			<node id="1350"/>
-			<node id="1351"/>
-			<node id="1352"/>
-			<node id="1353"/>
-			<node id="1354"/>
-			<node id="1355"/>
-			<node id="1356"/>
-			<node id="1357"/>
-			<node id="1358"/>
-			<node id="1359"/>
-			<node id="1360"/>
-			<node id="1361"/>
-			<node id="1362"/>
-			<node id="1363"/>
-			<node id="1364"/>
-			<node id="1365"/>
-			<node id="1366"/>
-			<node id="1367"/>
-			<node id="1368"/>
-			<node id="1369"/>
-			<node id="1370"/>
-			<node id="1371"/>
-			<node id="1372"/>
-			<node id="1373"/>
-			<node id="1374"/>
-			<node id="1375"/>
-			<node id="1376"/>
-			<node id="1377"/>
-			<node id="1378"/>
-			<node id="1379"/>
-			<node id="1380"/>
-			<node id="1381"/>
-			<node id="1382"/>
-			<node id="1383"/>
-			<node id="1384"/>
-			<node id="1385"/>
-			<node id="1386"/>
-			<node id="1387"/>
-			<node id="1388"/>
-			<node id="1389"/>
-			<node id="1390"/>
-			<node id="1391"/>
-			<node id="1392"/>
-			<node id="1393"/>
-			<node id="1394"/>
-			<node id="1395"/>
-			<node id="1396"/>
-			<node id="1397"/>
-			<node id="1398"/>
-			<node id="1399"/>
-			<node id="1400"/>
-			<node id="1401"/>
-			<node id="1402"/>
-			<node id="1403"/>
-			<node id="1404"/>
-			<node id="1405"/>
-			<node id="1406"/>
-			<node id="1407"/>
-			<node id="1408"/>
-			<node id="1409"/>
-			<node id="1410"/>
-			<node id="1411"/>
-			<node id="1412"/>
-			<node id="1413"/>
-			<node id="1414"/>
-			<node id="1415"/>
-			<node id="1416"/>
-			<node id="1417"/>
-			<node id="1418"/>
-			<node id="1419"/>
-			<node id="1420"/>
-			<node id="1421"/>
-			<node id="1422"/>
-			<node id="1423"/>
-			<node id="1424"/>
-			<node id="1425"/>
-			<node id="1426"/>
-			<node id="1427"/>
-			<node id="1428"/>
-			<node id="1429"/>
-			<node id="1430"/>
-			<node id="1431"/>
-			<node id="1432"/>
-			<node id="1433"/>
-			<node id="1434"/>
-			<node id="1435"/>
-			<node id="1436"/>
-			<node id="1437"/>
-			<node id="1438"/>
-			<node id="1439"/>
-			<node id="1440"/>
-		</NodeSet>
 		<NodeSet name="FixedDisplacement2">
 			<node id="1281"/>
 			<node id="1282"/>
@@ -4438,14 +3775,17 @@
 			<node id="1439"/>
 			<node id="1440"/>
 		</NodeSet>
+		<NodeSet name="NodalLoad1">
+			<node id="715"/>
+			<node id="720"/>
+			<node id="725"/>
+			<node id="730"/>
+			<node id="735"/>
+		</NodeSet>
 	</Geometry>
 	<Boundary>
 		<fix bc="x,y,z" node_set="FixedDisplacement1"/>
-		<fix bc="y,z" node_set="FixedDisplacement2"/>
-		<prescribe bc="x" node_set="PrescribedDisplacement1">
-			<scale lc="1">100</scale>
-			<relative>0</relative>
-		</prescribe>
+		<fix bc="x,y,z" node_set="FixedDisplacement2"/>
 	</Boundary>
 	<LoadData>
 		<loadcurve id="1" type="smooth">
@@ -4459,4 +3799,32 @@
 			<var type="stress"/>
 		</plotfile>
 	</Output>
+	<Step name="Step1">
+		<Control>
+			<time_steps>10</time_steps>
+			<step_size>0.1</step_size>
+			<max_refs>15</max_refs>
+			<max_ups>10</max_ups>
+			<diverge_reform>1</diverge_reform>
+			<reform_each_time_step>1</reform_each_time_step>
+			<dtol>0.001</dtol>
+			<etol>0.01</etol>
+			<rtol>0</rtol>
+			<lstol>0.9</lstol>
+			<min_residual>1e-020</min_residual>
+			<qnmethod>0</qnmethod>
+			<time_stepper>
+				<dtmin>0.01</dtmin>
+				<dtmax>0.1</dtmax>
+				<max_retries>5</max_retries>
+				<opt_iter>10</opt_iter>
+			</time_stepper>
+			<analysis type="static"/>
+		</Control>
+		<Loads>
+			<nodal_load bc="x" node_set="NodalLoad1">
+				<scale lc="1">1e+006</scale>
+			</nodal_load>
+		</Loads>
+	</Step>
 </febio_spec>

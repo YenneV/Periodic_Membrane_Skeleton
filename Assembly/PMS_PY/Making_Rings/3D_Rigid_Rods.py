@@ -81,6 +81,19 @@ class RigidRod:
             zpoint = self.pointA[2] + t*(self.deltaz/self.length)
             linecoords.append([xpoint,ypoint,zpoint])
         return linecoords #List of points generated is length + 1 as I need both endpoints
+    def vectorise(self): #vectorise as nematic
+        self.deltax = self.pointC[0] - self.pointA[0] # x component of direction vector from A to C
+        self.deltay = self.pointC[1] - self.pointA[1] # y component of direction vector from A to C
+        self.deltaz = self.pointC[2] - self.pointA[2] # z component of direction vector from A to C
+        self.vector = [(self.pointC[0] - self.pointA[0]), (self.pointC[1] - self.pointA[1]), (self.pointC[2] - self.pointA[2])] # vector components
+        self.magnitude = math.sqrt(self.deltax**2 + self.deltay**2 + self.deltaz**2) # vector magnitude
+        reversevec = [(self.pointA[0] - self.pointC[0]), (self.pointA[1] - self.pointC[1]), (self.pointA[2] - self.pointC[2])]
+        if self.deltay < 0:
+            self.vector = reversevec
+        elif self.deltay == 0 and self.deltax < 0:
+            self.vector = reversevec
+        elif self.deltay == 0 and self.deltax == 0 and self.deltaz <0:
+            self.vector = reversevec
     def neighbourlist(self):
         neighbours = []
         #selfID = (RigidRod.instances.index(self))
@@ -244,18 +257,42 @@ def validate(mover, trial_move, radius, length):
         #print(mover.output)
     return accept
 
+
+# 'directorfield' finds the average direction of (nematic) orientation
+def directorfield():
+    #vectors = []
+    xcomp = 0
+    ycomp = 0
+    zcomp = 0
+    n = len(RigidRod.instances)
+    for i in range(0, n):
+        RigidRod.instances[i].vectorise()
+        vector = RigidRod.instances[i].vector
+        xcomp += vector[0]
+        ycomp += vector[1]
+        zcomp += vector[2]
+        #vectors.append(RigidRod.instances[i].vector)
+    xcomp = xcomp/n
+    ycomp = ycomp/n
+    zcomp = zcomp/n
+    dirmag = math.sqrt(xcomp**2 + ycomp**2 + zcomp**2)
+    director = [xcomp/dirmag, ycomp/dirmag, zcomp/dirmag]
+    return director
+
+
+
 ## END OF FUNCTION DEFINITIONS ##
 
 # SETTING UP INITIAL VALUES
 # Setting up some parameters for simulation cell and steps
 cellradius = 50 #radius of axon, r coordinate
 celllength = 100 #length of axon, z coordinate
-steps = list(range(10000)) #Number of steps in my random walk
+steps = list(range(1)) #Number of steps in my random walk
 
 ## INITIALISING PARTICLES
 length = 5
 radius = 2
-nparticles = 500 #number of rod particles
+nparticles = 10 #number of rod particles
 edge = radius + (length/2) #the amount of space we need to leave between centrepoint and edges
 
 
@@ -293,6 +330,8 @@ for i in range(1,nparticles + 1):
         print('status is', status)
 
 
+data = directorfield()
+print('output data is', data)
 
 ## MAIN FUNCTION ##
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
