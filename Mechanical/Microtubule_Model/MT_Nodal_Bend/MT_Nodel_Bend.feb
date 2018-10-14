@@ -3816,14 +3816,14 @@
 			<time_stepper>
 				<dtmin>0.01</dtmin>
 				<dtmax>0.1</dtmax>
-				<max_retries>5</max_retries>
+				<max_retries>10</max_retries>
 				<opt_iter>10</opt_iter>
 			</time_stepper>
 			<analysis type="static"/>
 		</Control>
 		<Loads>
 			<nodal_load bc="x" node_set="NodalLoad1">
-				<scale lc="1">1e-012</scale>
+				<scale lc="1">5e-012</scale>
 			</nodal_load>
 		</Loads>
 	</Step>
