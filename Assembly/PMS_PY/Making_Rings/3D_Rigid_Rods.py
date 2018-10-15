@@ -85,6 +85,7 @@ class RigidRod:
         self.deltax = self.pointC[0] - self.pointA[0] # x component of direction vector from A to C
         self.deltay = self.pointC[1] - self.pointA[1] # y component of direction vector from A to C
         self.deltaz = self.pointC[2] - self.pointA[2] # z component of direction vector from A to C
+        self.polarvec = [(self.pointC[0] - self.pointA[0]), (self.pointC[1] - self.pointA[1]), (self.pointC[2] - self.pointA[2])]
         self.vector = [(self.pointC[0] - self.pointA[0]), (self.pointC[1] - self.pointA[1]), (self.pointC[2] - self.pointA[2])] # vector components
         self.magnitude = math.sqrt(self.deltax**2 + self.deltay**2 + self.deltaz**2) # vector magnitude
         reversevec = [(self.pointA[0] - self.pointC[0]), (self.pointA[1] - self.pointC[1]), (self.pointA[2] - self.pointC[2])]
@@ -94,6 +95,8 @@ class RigidRod:
             self.vector = reversevec
         elif self.deltay == 0 and self.deltax == 0 and self.deltaz <0:
             self.vector = reversevec
+        self.unitvector = [self.vector[0]/self.magnitude, self.vector[1]/self.magnitude, self.vector[2]/self.magnitude]
+        self.polarunit = [self.polarvec[0]/self.magnitude, self.polarvec[1]/self.magnitude, self.polarvec[2]/self.magnitude]
     def neighbourlist(self):
         neighbours = []
         #selfID = (RigidRod.instances.index(self))
@@ -258,8 +261,8 @@ def validate(mover, trial_move, radius, length):
     return accept
 
 
-# 'directorfield' finds the average direction of (nematic) orientation
-def directorfield():
+# 'directorfield1' finds the average direction of (nematic) orientation using components
+def directorfield1():
     #vectors = []
     xcomp = 0
     ycomp = 0
@@ -277,15 +280,75 @@ def directorfield():
     zcomp = zcomp/n
     dirmag = math.sqrt(xcomp**2 + ycomp**2 + zcomp**2)
     director = [xcomp/dirmag, ycomp/dirmag, zcomp/dirmag]
+    print('the director field is...', director)
+    distributionsum = 0
+    for j in range(0,n):
+        print('rod number', j)
+        rodunit = RigidRod.instances[j].polarunit 
+        print('the unit vector for the rod is', rodunit)
+        costheta = (director[0]*rodunit[0] + director[1]*rodunit[1] + director[2]*rodunit[2]) 
+        angle = math.acos(costheta)
+        print('angle is ', angle)
+        distfunc = 3*(costheta**2) - 1
+        print('expression is', distfunc)
+        distributionsum += distfunc
+    print('distribution sum is', distributionsum)
+    orderparameter = distributionsum/(2*n)
+    print('order parameter is', orderparameter)
     return director
 
+
+# 'directorfield2' finds the average direction of (nematic) orientation using angles
+def directorfield2():
+    alphsum = 0
+    betasum = 0
+    n = len(RigidRod.instances)
+    for i in range(0, n):
+        alpha = RigidRod.instances[i].alpha
+        if alpha < 0:
+            alpha += math.pi
+        elif alpha == math.pi:
+            alpha -= math.pi
+        beta = RigidRod.instances[i].beta
+        if beta < 0:
+            beta += math.pi
+        elif beta == math.pi:
+            beta -= math.pi
+        alphsum += alpha
+        betasum += beta
+    print('alphsum', alphsum)
+    print('betasum', betasum)
+    betaavg = betasum/n
+    alphaavg = alphsum/n
+    #..................................
+    delz = length*math.sin((math.pi/2) - alphaavg)
+    projectedlength = length*(math.cos((math.pi/2) - abs(alphaavg)))
+    delx = projectedlength*math.sin((math.pi/2) - betaavg)
+    dely = projectedlength*math.cos((math.pi/2) - betaavg)
+    dirmag = math.sqrt(delx**2 + dely**2 + delz**2)
+    director = [delx/dirmag, dely/dirmag, delz/dirmag]
+    print('the director field is...', director)
+    distributionsum = 0
+    for j in range(0,n):
+        print('j is', j)
+        RigidRod.instances[j].vectorise()
+        rodunit = RigidRod.instances[j].polarunit
+        print('the unit vector for the rod is...', rodunit)
+        costheta = (director[0]*rodunit[0] + director[1]*rodunit[1] + director[2]*rodunit[2])
+        angle = math.acos(costheta)
+        distfunc = 3*(costheta**2) - 1
+        distributionsum += distfunc
+    print('distribution sum is', distributionsum)
+    orderparameter = distributionsum/(2*n)
+    print('order parameter is', orderparameter)
+    return director
 
 
 ## END OF FUNCTION DEFINITIONS ##
 
 # SETTING UP INITIAL VALUES
 # Setting up some parameters for simulation cell and steps
-cellradius = 50 #radius of axon, r coordinate
+cellradius = 5 #radius of axon, r coordinate
 celllength = 100 #length of axon, z coordinate
 steps = list(range(1)) #Number of steps in my random walk
 
@@ -330,7 +393,7 @@ for i in range(1,nparticles + 1):
         print('status is', status)
 
 
-data = directorfield()
+data = directorfield1()
 print('output data is', data)
 
 ## MAIN FUNCTION ##
