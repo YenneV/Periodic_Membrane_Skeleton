@@ -89,11 +89,11 @@ class RigidRod:
         self.vector = [(self.pointC[0] - self.pointA[0]), (self.pointC[1] - self.pointA[1]), (self.pointC[2] - self.pointA[2])] # vector components
         self.magnitude = math.sqrt(self.deltax**2 + self.deltay**2 + self.deltaz**2) # vector magnitude
         reversevec = [(self.pointA[0] - self.pointC[0]), (self.pointA[1] - self.pointC[1]), (self.pointA[2] - self.pointC[2])]
-        if self.deltay < 0:
+        if self.deltaz < 0: #changed from deltay to deltaz
             self.vector = reversevec
-        elif self.deltay == 0 and self.deltax < 0:
+        elif self.deltaz == 0 and self.deltax < 0:
             self.vector = reversevec
-        elif self.deltay == 0 and self.deltax == 0 and self.deltaz <0:
+        elif self.deltaz == 0 and self.deltax == 0 and self.deltay <0:
             self.vector = reversevec
         self.unitvector = [self.vector[0]/self.magnitude, self.vector[1]/self.magnitude, self.vector[2]/self.magnitude]
         self.polarunit = [self.polarvec[0]/self.magnitude, self.polarvec[1]/self.magnitude, self.polarvec[2]/self.magnitude]
@@ -271,6 +271,7 @@ def directorfield1():
     for i in range(0, n):
         RigidRod.instances[i].vectorise()
         vector = RigidRod.instances[i].vector
+        print('my vector is...', vector)
         xcomp += vector[0]
         ycomp += vector[1]
         zcomp += vector[2]
@@ -278,21 +279,22 @@ def directorfield1():
     xcomp = xcomp/n
     ycomp = ycomp/n
     zcomp = zcomp/n
+    #print('components of director', xcomp, ycomp, zcomp)
     dirmag = math.sqrt(xcomp**2 + ycomp**2 + zcomp**2)
     director = [xcomp/dirmag, ycomp/dirmag, zcomp/dirmag]
     print('the director field is...', director)
     distributionsum = 0
     for j in range(0,n):
-        print('rod number', j)
+        #print('rod number', j)
         rodunit = RigidRod.instances[j].polarunit 
-        print('the unit vector for the rod is', rodunit)
+        #print('the unit vector for the rod is', rodunit)
         costheta = (director[0]*rodunit[0] + director[1]*rodunit[1] + director[2]*rodunit[2]) 
         angle = math.acos(costheta)
-        print('angle is ', angle)
+        #print('angle is ', angle)
         distfunc = 3*(costheta**2) - 1
-        print('expression is', distfunc)
+        #print('expression is', distfunc)
         distributionsum += distfunc
-    print('distribution sum is', distributionsum)
+    #print('distribution sum is', distributionsum)
     orderparameter = distributionsum/(2*n)
     print('order parameter is', orderparameter)
     return director
@@ -348,14 +350,14 @@ def directorfield2():
 
 # SETTING UP INITIAL VALUES
 # Setting up some parameters for simulation cell and steps
-cellradius = 5 #radius of axon, r coordinate
+cellradius = 25 #radius of axon, r coordinate
 celllength = 100 #length of axon, z coordinate
-steps = list(range(1)) #Number of steps in my random walk
+steps = list(range(10000)) #Number of steps in my random walk
 
 ## INITIALISING PARTICLES
-length = 5
+length = 10
 radius = 2
-nparticles = 10 #number of rod particles
+nparticles = 260 #number of rod particles
 edge = radius + (length/2) #the amount of space we need to leave between centrepoint and edges
 
 
@@ -367,10 +369,10 @@ for i in range(1,nparticles + 1):
     starttheta = random.uniform(0, 2*math.pi)
     startz = random.uniform(0 + edge, celllength - edge)
     start_cyl = [startr,starttheta,startz]
-    print('starting cylindrical coords are', start_cyl)
+    #print('starting cylindrical coords are', start_cyl)
     #converting to cartesian
-    start_cart = transform_cylcar([startr,starttheta,startz]) #doesn't transform take cart adn return cyl
-    print('starting Cartesian coords are', start_cart)
+    start_cart = transform_cylcar([startr,starttheta,startz]) 
+    #print('starting Cartesian coords are', start_cart)
     #alpha and beta determine the orientation of the rod
     startalpha = random.uniform(-math.pi, math.pi)
     startbeta = random.uniform(-math.pi, math.pi)
@@ -378,23 +380,29 @@ for i in range(1,nparticles + 1):
     varname = 'rod{}'.format(i)
     varname = RigidRod(start_cart, length, radius, startalpha, startbeta)
     varname.whereami(start_cart, startalpha, startbeta)
-    status = overlap(varname)
-    while status == True:
-        #print('coordinates not within range')
+    initial_coords = [start_cart[0], start_cart[1], start_cart[2], startalpha, startbeta]
+    status = validate(varname, initial_coords, cellradius, celllength)
+    #status = overlap(varname)
+    while status == False:
+        print('coordinates not within range')
         newr = random.uniform(0 + edge, cellradius - edge)
+        print('new r value is', newr)
         newtheta = random.uniform(0, 2*math.pi)
         newz = random.uniform(0 + edge, celllength - edge)
+        print('new z value is', newz)
         new_cart = transform_cylcar([newr,newtheta,newz])
         newalpha = random.uniform(-math.pi, math.pi)
         newbeta = random.uniform(-math.pi, math.pi)
         varname.whereami(new_cart, newalpha, newbeta)
+        new_coords = [new_cart[0], new_cart[1], new_cart[2], newalpha, newbeta]
         #print('new position to try', varname.pointA, varname.pointC)
-        status = overlap(varname)
+        status = validate(varname, new_coords, cellradius, celllength)
+        #status = overlap(varname)
         print('status is', status)
 
 
-data = directorfield1()
-print('output data is', data)
+#data = directorfield1()
+
 
 ## MAIN FUNCTION ##
 # Random Walk - particle chosen at random, coordinates read in, 'step' function called
@@ -416,7 +424,7 @@ for i in steps:
         mover.whereami(initial_position, initial_alpha, initial_beta)
         #print('move not allowed, remains at:')
         #print(mover.position)
-    if i%1000 == 0:
+    if i%1000 == 0: #code to print out placement of rod endpoints to a text file
         with open('D:\Code\Assembly\PMS_PY\Making_Rings\Results\Rigid_Rods_3D\Testing\coords{}.txt.'.format(i), 'w') as f:
             for j in RigidRod.instances:
                 f.write(str(j.pointA[0]))
@@ -431,4 +439,6 @@ for i in steps:
                 f.write(" ")
                 f.write(str(j.pointC[2]))
                 f.write('\n')
+    if i%9999 == 0: #code to call director field and calculate the nematic order parameter for the given config
+        directorfield1()
     

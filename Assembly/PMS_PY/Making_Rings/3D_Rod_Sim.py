@@ -5,8 +5,8 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
 # I'll need to input some variables
-steps = list(range(10000)) #Specify the number of steps in the walk so I can read in the right number of files
-nparticles = 500 #Specify how many particles are in the simulation so I know how many lines I need
+steps = list(range(1)) #Specify the number of steps in the walk so I can read in the right number of files
+nparticles = 2 #Specify how many particles are in the simulation so I know how many lines I need
 
 for i in steps:
     if i%1000 == 0:
@@ -27,8 +27,10 @@ for i in steps:
                 ypoints = [data[j][1], data[j][4]]
                 zpoints = [data[j][2], data[j][5]]
                 ax.plot(xpoints, ypoints, zpoints, linewidth=4, marker='o', markersize=4)
+            #line to add director field - must be put in manually
+            ax.plot([40,40.39], [40,39.52], [0, 9.98], linewidth = 2, marker='*', markersize=5, color='red')
             plt.savefig('D:\Images\RigidRod_3D\image{}.pdf'.format(i), dpi=350)
-            #plt.show()
+            plt.show()
             plt.close()
 
 # CREATING TEST PLOT
