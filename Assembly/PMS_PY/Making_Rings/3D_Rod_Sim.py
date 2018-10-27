@@ -14,12 +14,12 @@ for i in steps:
             data = np.genfromtxt(p, dtype = float, delimiter = " ")
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
-            ax.set_xlim(-50,50)
-            ax.set_ylim(-50,50)
-            ax.set_zlim(0,100)
-            ax.set_xlabel('x coordinate')
-            ax.set_ylabel('y coordinate')
-            ax.set_zlabel('z coordinate')
+            ax.set_xlim(-1000,1000)
+            ax.set_ylim(-1000,1000)
+            ax.set_zlim(0,2000)
+            ax.set_xlabel('x position/nm')
+            ax.set_ylabel('y position/nm')
+            ax.set_zlabel('z position/nm')
             plt.grid()
             plt.title('Step = {}'.format(i))
             for j in range(0, nparticles):
@@ -28,7 +28,7 @@ for i in steps:
                 zpoints = [data[j][2], data[j][5]]
                 ax.plot(xpoints, ypoints, zpoints, linewidth=4, marker='o', markersize=4)
             #line to add director field - must be put in manually
-            ax.plot([40,40.39], [40,39.52], [0, 9.98], linewidth = 2, marker='*', markersize=5, color='red')
+            ax.plot([950,40.39], [950,39.52], [0, 9.98], linewidth = 2, marker='*', markersize=5, color='red')
             plt.savefig('D:\Images\RigidRod_3D\image{}.pdf'.format(i), dpi=350)
             plt.show()
             plt.close()

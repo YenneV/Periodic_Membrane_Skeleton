@@ -1,4 +1,0 @@
-***Images generated from model 'MT_Nodal_Bend.prv'.***
-
-This simulation was run with a nodal load on nodes 714, 719, 724, 729 and 734.  The load was 1 pN.
-10 time steps were used.  Images show displacement in the x direction in which the force was directed.

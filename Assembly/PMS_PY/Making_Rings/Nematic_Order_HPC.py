@@ -1,9 +1,10 @@
-#Monte Carlo Type Simulation for multiple rodlike objects in a 2D Cartesian space
+#3D Rigid Rod Monte Carlo Simulations to Calculate Nematic Order Parameters for 
+#different rod lengths and densities - FOR USE ON SHARC
+
+#Monte Carlo Type Simulation for multiple rodlike objects in a 3D Cartesian space
 
 import numpy as np
 import math
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import random
 random.seed(10)
 
@@ -132,6 +133,88 @@ class RigidRod:
 
 ## FUNCTION DEFINITIONS ##
 
+# 'particle_creation' takes the number of particles, their dimensions, and those of the cell and 
+# places them randomly within the space
+# NOTE - NO EXCEPTIONS WRITTEN SO IT WILL NOT TIME OUT IF THEY CANNOT BE PLACED!
+def particle_creation(nparticles, length, radius, celllength, cellradius):
+    for i in range(1,nparticles + 1):
+        #print('particle no', i)
+        edge = radius + (length/2)
+        #choosing some random cylindrical coordinates
+        startr = random.uniform(0 + edge, cellradius - edge)
+        starttheta = random.uniform(0, 2*math.pi)
+        startz = random.uniform(0 + edge, celllength - edge)
+        start_cyl = [startr,starttheta,startz]
+        #converting to cartesian
+        start_cart = transform_cylcar([startr,starttheta,startz]) 
+        #alpha and beta determine the orientation of the rod
+        startalpha = random.uniform(-math.pi, math.pi)
+        startbeta = random.uniform(-math.pi, math.pi)
+        #creating a rod with these coords
+        varname = 'rod{}'.format(i)
+        varname = RigidRod(start_cart, length, radius, startalpha, startbeta)
+        varname.whereami(start_cart, startalpha, startbeta)
+        initial_coords = [start_cart[0], start_cart[1], start_cart[2], startalpha, startbeta]
+        status = validate(varname, initial_coords, cellradius, celllength)
+        #status = overlap(varname)
+        while status == False:
+            #print('coordinates not within range')
+            newr = random.uniform(0 + edge, cellradius - edge)
+            #print('new r value is', newr)
+            newtheta = random.uniform(0, 2*math.pi)
+            newz = random.uniform(0 + edge, celllength - edge)
+            #print('new z value is', newz)
+            new_cart = transform_cylcar([newr,newtheta,newz])
+            newalpha = random.uniform(-math.pi, math.pi)
+            newbeta = random.uniform(-math.pi, math.pi)
+            varname.whereami(new_cart, newalpha, newbeta)
+            new_coords = [new_cart[0], new_cart[1], new_cart[2], newalpha, newbeta]
+            #print('new position to try', varname.pointA, varname.pointC)
+            status = validate(varname, new_coords, cellradius, celllength)
+
+# 'random_walk' function calls particle_creation to generate some particles, then chooses one randomly
+# and calls 'step' to take a trial step then 'validate' to check that this is an allowed move,
+# coordinates and orientation updated if particle moved 
+def random_walk(nparticles, length, radius, celllength, cellradius, steps):
+    particle_creation(nparticles, length, radius, celllength, cellradius)
+    for i in steps:
+        #print('step number is', i)
+        mover = (random.choice(RigidRod.instances)) #Selects a particle to move
+        initial_position = mover.position
+        #print('initial position is', initial_position)
+        initial_alpha = mover.alpha
+        initial_beta = mover.beta
+        trial_move = step(initial_position, initial_alpha, initial_beta) #Returns list of [x,y,z,alpha,beta]
+        #print('trial position is', trial_move)
+        accept = validate(mover, trial_move, cellradius, celllength) # function to return a yes or no
+        if accept == True:
+            mover.whereami(trial_move[0:3], trial_move[3], trial_move[4])
+            #print('move allowed')
+        else:
+            mover.whereami(initial_position, initial_alpha, initial_beta)
+            #print('move not allowed, remains at:')
+            #print(mover.position)
+        #if i%1000 == 0: #code to print out placement of rod endpoints to a text file
+        #    with open('D:\Code\Assembly\PMS_PY\Making_Rings\Results\Rigid_Rods_3D\Testing\coords{}.txt.'.format(i), 'w') as f:
+        #        for j in RigidRod.instances:
+        #            f.write(str(j.pointA[0]))
+        #            f.write(" ")
+        #            f.write(str(j.pointA[1]))
+        #            f.write(" ")
+        #            f.write(str(j.pointA[2]))
+        #            f.write(" ")
+        #            f.write(str(j.pointC[0]))
+        #            f.write(" ")
+        #            f.write(str(j.pointC[1]))
+        #            f.write(" ")
+        #            f.write(str(j.pointC[2]))
+        #            f.write('\n')
+        if i == 9999: #code to call director field and calculate the nematic order parameter for the given config
+            orderparameter = directorfield1()
+    return orderparameter
+
+
+
 # 'step' function generates a trial move of either a displacement or orientational change in 3D space
 def step(initial, alpha, beta):
     x = initial[0]
@@ -229,31 +312,31 @@ def validate(mover, trial_move, radius, length):
     accept = False
     if rA < minr:
         accept = False
-        print('A point out of bounds in r - less than min')
+        #print('A point out of bounds in r - less than min')
     elif rA > maxr:
         accept = False
-        print('A point out of bounds in r - more than max')
+        #print('A point out of bounds in r - more than max')
     elif rC < minr:
         accept = False
-        print('C point out of bounds in r - less than min')
+        #print('C point out of bounds in r - less than min')
     elif rC > maxr:
         accept = False
-        print('C point out of bounds in r - more than max')
+        #print('C point out of bounds in r - more than max')
     elif zA < minz:
         accept = False
-        print('A point out of bounds in z - less than min')
+        #print('A point out of bounds in z - less than min')
     elif zA > maxz:
         accept = False
-        print('A point out of bounds in z - more than max')
+        #print('A point out of bounds in z - more than max')
     elif zC < minz:
         accept = False
-        print('C point out of bounds in z - less than min')
+        #print('C point out of bounds in z - less than min')
     elif zC > maxz:
         accept = False
-        print('C point out of bounds in z - more than max')
+        #print('C point out of bounds in z - more than max')
     elif overlap(mover) == True:
         accept = False
-        print('trial move would overlap another particle')
+        #print('trial move would overlap another particle')
     else:
         accept = True
         #print('accepted with endpoints at:')
@@ -261,7 +344,8 @@ def validate(mover, trial_move, radius, length):
     return accept
 
 
-# 'directorfield1' finds the average direction of (nematic) orientation using components
+# 'directorfield1' finds the average direction of (nematic) orientation using components then calculates the 
+# nematic order parameter and returns it to the calling function
 def directorfield1():
     #vectors = []
     xcomp = 0
@@ -271,7 +355,7 @@ def directorfield1():
     for i in range(0, n):
         RigidRod.instances[i].vectorise()
         vector = RigidRod.instances[i].vector
-        print('my vector is...', vector)
+        #print('my vector is...', vector)
         xcomp += vector[0]
         ycomp += vector[1]
         zcomp += vector[2]
@@ -282,7 +366,7 @@ def directorfield1():
     #print('components of director', xcomp, ycomp, zcomp)
     dirmag = math.sqrt(xcomp**2 + ycomp**2 + zcomp**2)
     director = [xcomp/dirmag, ycomp/dirmag, zcomp/dirmag]
-    print('the director field is...', director)
+    #print('the director field is...', director)
     distributionsum = 0
     for j in range(0,n):
         #print('rod number', j)
@@ -296,149 +380,41 @@ def directorfield1():
         distributionsum += distfunc
     #print('distribution sum is', distributionsum)
     orderparameter = distributionsum/(2*n)
-    print('order parameter is', orderparameter)
-    return director
-
-
-# 'directorfield2' finds the average direction of (nematic) orientation using angles - NOT CURRENTLY USED
-def directorfield2():
-    alphsum = 0
-    betasum = 0
-    n = len(RigidRod.instances)
-    for i in range(0, n):
-        alpha = RigidRod.instances[i].alpha
-        if alpha < 0:
-            alpha += math.pi
-        elif alpha == math.pi:
-            alpha -= math.pi
-        beta = RigidRod.instances[i].beta
-        if beta < 0:
-            beta += math.pi
-        elif beta == math.pi:
-            beta -= math.pi
-        alphsum += alpha
-        betasum += beta
-    print('alphsum', alphsum)
-    print('betasum', betasum)
-    betaavg = betasum/n
-    alphaavg = alphsum/n
-    #..................................
-    delz = length*math.sin((math.pi/2) - alphaavg)
-    projectedlength = length*(math.cos((math.pi/2) - abs(alphaavg)))
-    delx = projectedlength*math.sin((math.pi/2) - betaavg)
-    dely = projectedlength*math.cos((math.pi/2) - betaavg)
-    dirmag = math.sqrt(delx**2 + dely**2 + delz**2)
-    director = [delx/dirmag, dely/dirmag, delz/dirmag]
-    print('the director field is...', director)
-    distributionsum = 0
-    for j in range(0,n):
-        print('j is', j)
-        RigidRod.instances[j].vectorise()
-        rodunit = RigidRod.instances[j].polarunit
-        print('the unit vector for the rod is...', rodunit)
-        costheta = (director[0]*rodunit[0] + director[1]*rodunit[1] + director[2]*rodunit[2])
-        angle = math.acos(costheta)
-        distfunc = 3*(costheta**2) - 1
-        distributionsum += distfunc
-    print('distribution sum is', distributionsum)
-    orderparameter = distributionsum/(2*n)
-    print('order parameter is', orderparameter)
-    return director
+    #print('order parameter is', orderparameter)
+    return orderparameter
 
 
 ## END OF FUNCTION DEFINITIONS ##
 
 # SETTING UP INITIAL VALUES
 # Setting up some parameters for simulation cell and steps
-cellradius = 25 #radius of axon, r coordinate
-celllength = 100 #length of axon, z coordinate
+cellradius = 400 #radius of axon, r coordinate
+celllength = 2000 #length of axon, z coordinate
 steps = list(range(10000)) #Number of steps in my random walk
 
 ## INITIALISING PARTICLES
-length = 50
-radius = 2
-nparticles = 60 #number of rod particles
-edge = radius + (length/2) #the amount of space we need to leave between centrepoint and edges
+length = 100
+radius = 4
+nparticles = 10 #number of rod particles
+
+# Monte Carlo Parameters
+nconfigs = 100
+qsum = 0
 
 
-## CREATING PARTICLES
-for i in range(1,nparticles + 1):
-    print('particle no', i)
-    #choosing some random cylindrical coordinates
-    startr = random.uniform(0 + edge, cellradius - edge)
-    starttheta = random.uniform(0, 2*math.pi)
-    startz = random.uniform(0 + edge, celllength - edge)
-    start_cyl = [startr,starttheta,startz]
-    #print('starting cylindrical coords are', start_cyl)
-    #converting to cartesian
-    start_cart = transform_cylcar([startr,starttheta,startz]) 
-    #print('starting Cartesian coords are', start_cart)
-    #alpha and beta determine the orientation of the rod
-    startalpha = random.uniform(-math.pi, math.pi)
-    startbeta = random.uniform(-math.pi, math.pi)
-    #creating a rod with these coords
-    varname = 'rod{}'.format(i)
-    varname = RigidRod(start_cart, length, radius, startalpha, startbeta)
-    varname.whereami(start_cart, startalpha, startbeta)
-    initial_coords = [start_cart[0], start_cart[1], start_cart[2], startalpha, startbeta]
-    status = validate(varname, initial_coords, cellradius, celllength)
-    #status = overlap(varname)
-    while status == False:
-        print('coordinates not within range')
-        newr = random.uniform(0 + edge, cellradius - edge)
-        print('new r value is', newr)
-        newtheta = random.uniform(0, 2*math.pi)
-        newz = random.uniform(0 + edge, celllength - edge)
-        print('new z value is', newz)
-        new_cart = transform_cylcar([newr,newtheta,newz])
-        newalpha = random.uniform(-math.pi, math.pi)
-        newbeta = random.uniform(-math.pi, math.pi)
-        varname.whereami(new_cart, newalpha, newbeta)
-        new_coords = [new_cart[0], new_cart[1], new_cart[2], newalpha, newbeta]
-        #print('new position to try', varname.pointA, varname.pointC)
-        status = validate(varname, new_coords, cellradius, celllength)
-        #status = overlap(varname)
-        print('status is', status)
+## MAIN FUNCTION - Monte Carlo loop for finding mean order parameter ##
+for i in range(0,nconfigs):
+    #print('MC iteration...', i)
+    result = random_walk(nparticles, length, radius, celllength, cellradius, steps)
+    #print('order parameter is', result)
+    qsum += result
+
+qsum = qsum/nconfigs
+#print('mean value of order parameter for ', nparticles, 'of length ', length, 'is ', qsum)
+
+with open('/home/php17hm/Rigid_Rods_3D/result.txt'.format(i), 'w') as f:
+    f.write('mean value of order parameter for ', str(nparticles), 'of length ', str(length), 'is ')
+    f.write('\n')
+    f.write(str(qsum))
 
 
-#data = directorfield1()
-
-
-## MAIN FUNCTION ##
-# Random Walk - particle chosen at random, coordinates read in, 'step' function called
-# to take a trial step, 'validate' function called to say if ok or not, coordinates updated accordingly
-for i in steps:
-    print(i)
-    mover = (random.choice(RigidRod.instances)) #Selects a particle to move
-    initial_position = mover.position
-    #print('initial position is', initial_position)
-    initial_alpha = mover.alpha
-    initial_beta = mover.beta
-    trial_move = step(initial_position, initial_alpha, initial_beta) #Returns list of [x,y,z,alpha,beta]
-    #print('trial position is', trial_move)
-    accept = validate(mover, trial_move, cellradius, celllength) # function to return a yes or no
-    if accept == True:
-        mover.whereami(trial_move[0:3], trial_move[3], trial_move[4])
-        print('move allowed')
-    else:
-        mover.whereami(initial_position, initial_alpha, initial_beta)
-        #print('move not allowed, remains at:')
-        #print(mover.position)
-    if i%1000 == 0: #code to print out placement of rod endpoints to a text file
-        with open('D:\Code\Assembly\PMS_PY\Making_Rings\Results\Rigid_Rods_3D\Testing\coords{}.txt.'.format(i), 'w') as f:
-            for j in RigidRod.instances:
-                f.write(str(j.pointA[0]))
-                f.write(" ")
-                f.write(str(j.pointA[1]))
-                f.write(" ")
-                f.write(str(j.pointA[2]))
-                f.write(" ")
-                f.write(str(j.pointC[0]))
-                f.write(" ")
-                f.write(str(j.pointC[1]))
-                f.write(" ")
-                f.write(str(j.pointC[2]))
-                f.write('\n')
-    if i%9999 == 0: #code to call director field and calculate the nematic order parameter for the given config
-        directorfield1()
-    
